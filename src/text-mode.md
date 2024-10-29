@@ -1,0 +1,7 @@
+## Text Mode
+
+All messages are transferred in human-readable plain text, terminated using a single line-feed character (`LF`). For compatibility with manual terminal clients (e.g. `telnet` for debugging), server implementations are recommended to also accept `CR LF` and `CR`. Client implementations should never rely on any such processing and only submit proper `LF` termination; they do not need to expect any other line termination. If server implementation choose to, they may adjust line termination to match what a client has previously sent. Clients must not expect servers to implement any such convenience behaviour; plain `LF` is the only guaranteed line termination.
+
+The protocol mandates US-ASCII (7 bit) as character set as this is the base for UTF-8 as well as most local legacy character sets, which minimizes compatibility issues regardless of local character set choices. Implementations are free to use any character set compatible with US-ASCII but must neither send "extended" characters (outside US-ASCII) nor make assumptions about incompatible client character sets.
+
+In the future, a binary mode may be specified if need for a more compact message format arises, but (also to ease debugging) text mode is currently the only supported mode and shall remain supported in future protocol revisions as well.
