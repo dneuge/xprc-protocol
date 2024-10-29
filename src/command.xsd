@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--xs:import namespace="http://www.w3.org/XML/1998/namespace" /-->
+
+    <xs:element name="command" type="Command">
+        <xs:annotation>
+            <xs:documentation>
+                Describes a single command for protocol user documentation.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="Command">
+        <xs:all>
+            <xs:element name="mnemonic" type="Mnemonic">
+                <xs:annotation>
+                    <xs:documentation>
+                        Describes how the command name is derived from a mnemonic description.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="Markdown">
+                <xs:annotation>
+                    <xs:documentation>
+                        Main description; should provide an overview of what the command does and is intended for. Should not go into details regarding options or parameters. Side-effects and conditions may make sense to be described as notes instead to be more visible.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="options">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="option" type="Option" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="parameters" type="Parameters" />
+            <xs:element name="responses">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="response" type="Markdown" maxOccurs="unbounded" />
+                        <xs:element name="remark" type="Markdown" minOccurs="0" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="notes" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Additional notes to be shown as bullet items.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="note" type="Markdown" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="examples">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="example" type="Example" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="title" type="xs:string" />
+        <xs:attribute name="group" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="Mnemonic" mixed="true">
+        <xs:sequence>
+            <xs:element name="m" type="xs:string" minOccurs="4" maxOccurs="4" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Option">
+        <xs:sequence>
+            <xs:element name="description" type="Markdown" />
+            <xs:element name="suffixes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="suffix" type="OptionSuffix" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="constants" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="constant" type="OptionConstant" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="default" type="xs:string" />
+        <xs:attribute name="defaultRemark" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="OptionSuffix">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="OptionConstant">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="Parameters">
+        <xs:sequence>
+            <xs:element name="parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="subparameters" type="SubParameters" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SubParameters">
+        <xs:sequence>
+            <xs:element name="parameter" type="Parameter" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="delimiter" type="xs:string" />
+        <xs:attribute name="multiplicity" default="1" type="ParameterMultiplicity" />
+    </xs:complexType>
+
+    <xs:complexType name="Parameter">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="multiplicity" default="1" type="ParameterMultiplicity" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="ParameterMultiplicity">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="?">
+                <xs:annotation>
+                    <xs:documentation>
+                        The parameter is optional.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        The parameter occurs exactly once.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="+">
+                <xs:annotation>
+                    <xs:documentation>
+                        The parameter occurs at least once, can be repeated immediately afterwards.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="*">
+                <xs:annotation>
+                    <xs:documentation>
+                        The parameter can be repeated or omitted.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="Example">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="ctos" type="ExampleClientToServer" />
+            <xs:element name="stoc" type="ExampleServerToClient" />
+            <xs:element name="remark" type="Markdown" />
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="ExampleMessage" mixed="true">
+        <xs:sequence>
+            <xs:element name="remark" type="Markdown" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ExampleClientToServer">
+        <xs:annotation>
+            <xs:documentation>
+                One message sent from client to server (request).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ExampleMessage" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ExampleServerToClient">
+        <xs:annotation>
+            <xs:documentation>
+                One message sent from server to client (response).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="ExampleMessage" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!--
+    <xs:complexType name="ExampleRemark">
+        <xs:annotation>
+            <xs:documentation>
+                Annotates the example to provide additional explanations/conditions describing the behaviour. Can be used either at the end of a message or in between messages.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="xs:string" />
+        </xs:complexContent>
+    </xs:complexType>
+    -->
+
+    <xs:complexType name="Markdown">
+        <!-- TODO: is language injection for Intellij possible to be defined by XMLSchema? -->
+        <xs:complexContent>
+            <xs:extension base="xs:string" />
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

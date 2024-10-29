@@ -1,0 +1,19 @@
+<document>
+    <parts>
+        <markdown file="intro.md" />
+        <markdown file="text-mode.md" />
+        <markdown file="handshake.md" />
+        <markdown file="basic-syntax.md" />
+        <markdown file="escape-sequences.md" />
+        <chapter title="Capabilities"><!-- TODO: rename to "server", add commands to update server timestamp etc.? -->
+            <commands group="capabilities" />
+        </chapter>
+        <chapter title="DataRefs">
+            <markdown file="dataref-types.md" />
+            <commands group="dataref" />
+        </chapter>
+        <chapter title="Commands">
+            <commands group="xpcommand" />
+        </chapter>
+    </parts>
+</document>

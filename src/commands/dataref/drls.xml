@@ -1,0 +1,60 @@
+<command name="DRLS" title="List DataRefs" group="dataref"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>D</m>ata<m>R</m>ef <m>L</m>i<m>s</m>t</mnemonic>
+    <description>
+        Lists information about available DataRefs. The command allows retrieval of information about specific datarefs as well as listing all DataRefs known to X-Plane (unspecific). Unspecific retrieval depends on X-Plane 12.04 APIs or workarounds in case of previous versions. If unspecific retrieval is not supported, servers should reply with an error status.
+    </description>
+    <options>
+        <option name="rwCheck" default="simulator">
+            <description>
+                Use the read-only/read-write flag available from X-Plane or check for internal permissions available to datarefs claimed by XPRC?
+            </description>
+            <constants>
+                <constant name="simulator">
+                    use the flag published on X-Plane (may give a false `ro` indication for DataRefs claimed by XPRC)
+                </constant>
+                <constant name="server">
+                    if the DataRef is claimed by XPRC, check for general availability in XPRC
+                </constant>
+                <constant name="session">
+                    if the DataRef is claimed by XPRC, check for the current session
+                </constant>
+            </constants>
+        </option>
+    </options>
+    <parameters>
+        <parameter multiplicity="*">Dataref name (string) to retrieve information for. If none are provided, all available datarefs are listed.</parameter>
+    </parameters>
+    <responses>
+        <response>Status: `ACK` if requested listing is technically possible, `ERR` if not</response>
+        <response>
+            one dataref definition per message; fields separated by semicolon:
+            1. Comma-separated list of supported data types (see DataRef Types)
+            2. `ro` if indicated as read-only, `rw` if indicated as writable
+            3. name of DataRef
+        </response>
+        <remark>
+            If information about specific datarefs has been requested but some (or all) of them are not found within X-Plane, the returned list may be incomplete. A completely empty result (`+ACK` followed by `-ACK`) is also possible in that case.
+        </remark>
+    </responses>
+    <examples>
+        <example>
+            <ctos>ABCD DRLS</ctos>
+            <stoc>+ACK ABCD 1836</stoc>
+            <stoc>+ABCD 2642 int,float,double;rw;sim/some/ref</stoc>
+            <stoc>+ABCD 2642 blob;ro;something/else</stoc>
+            <stoc>-ABCD 2642 int;rw;what/ever</stoc>
+        </example>
+        <example>
+            <ctos>BBBB DRLS sim/some/ref;non/existent</ctos>
+            <stoc>+ACK BBBB 3520</stoc>
+            <stoc>-BBBB 3526 int,float,double;rw;sim/some/ref</stoc>
+        </example>
+        <example>
+            <ctos>FFFF DRLS non/existent</ctos>
+            <stoc>+ACK FFFF 6789</stoc>
+            <stoc>-ACK FFFF 6800</stoc>
+        </example>
+    </examples>
+</command>

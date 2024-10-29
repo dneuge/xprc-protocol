@@ -1,0 +1,83 @@
+<command name="DRQV" title="Query DataRef Values" group="dataref"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>D</m>ata<m>R</m>ef <m>Q</m>uery <m>V</m>alues</mnemonic>
+    <description>
+        Retrieves the momentary values of requested DataRefs.
+    </description>
+    <options>
+        <option name="freq" default="1000ms">
+            <description>update frequency</description>
+            <suffixes>
+                <suffix name="ms">milliseconds</suffix>
+                <suffix name="f">frames</suffix>
+            </suffixes>
+        </option>
+        <option name="times" defaultRemark="infinite, until terminated">
+            <description>
+                number of times to update
+            </description>
+        </option>
+        <option name="phase" defaultRemark="don't care">
+            <description>
+                when to read the value
+            </description>
+            <constants>
+                <constant name="0">
+                    before flight model
+                </constant>
+                <constant name="1">
+                    after flight model
+                </constant>
+            </constants>
+        </option>
+    </options>
+    <parameters>
+        <subparameters multiplicity="+" delimiter=":">
+            <parameter>requested type</parameter>
+            <parameter>name of the requested DataRef</parameter>
+        </subparameters>
+    </parameters>
+    <responses>
+        <response>
+            Status
+            * If any dataref cannot be found or any type is unavailable: `ERR`
+            * Otherwise: `ACK`
+        </response>
+        <response>
+            Value at referenced time
+            * see DataRef type descriptions for value encoding
+            * semicolon-separated in same order as requested
+        </response>
+    </responses>
+    <notes>
+        <note>
+            If a dataref provides multiple types, multiple of them can be requested with the same command (see example).
+        </note>
+        <note>
+            The first value will be provided as soon as possible (not delayed by `freq` option).
+        </note>
+    </notes>
+    <examples>
+        <example>
+            <ctos>ABCD DRQV;freq=10f int:some/ref;blob:some/ref;float:other/value</ctos>
+            <stoc>+ACK ABCD 15210</stoc>
+            <stoc>+ABCD 15210 5;2,0104;3.43</stoc>
+            <stoc>+ABCD 15534 5;2,0104;3.42</stoc>
+            <stoc>+ABCD 15784 2;2,0001;3.43</stoc>
+            <ctos>ABCD TERM <remark>channel/command requested to be terminated</remark></ctos>
+            <stoc>-ACK ABCD 15821</stoc>
+            <remark>channel closed by just acknowledging termination request</remark>
+        </example>
+        <example>
+            <ctos>xyz1 DRQV;times=5 int:what/ever</ctos>
+            <stoc>+ACK xyz1 7234</stoc>
+            <stoc>+xyz1 7235 3</stoc>
+            <stoc>+xyz1 7268 3</stoc>
+            <stoc>+xyz1 7301 2</stoc>
+            <stoc>+xyz1 7315 3</stoc>
+            <stoc>-xyz1 7329 1</stoc>
+            <remark>channel closed with last value</remark>
+        </example>
+    </examples>
+</command>
