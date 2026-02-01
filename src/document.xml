@@ -1,6 +1,8 @@
-<document>
+<document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="document.xsd">
     <parts>
         <markdown file="intro.md" />
+        <markdown file="passwords.md" />
         <markdown file="text-mode.md" />
         <markdown file="handshake.md" />
         <markdown file="basic-syntax.md" />
@@ -14,6 +16,9 @@
         </chapter>
         <chapter title="Commands">
             <commands group="xpcommand" />
+        </chapter>
+        <chapter title="Appendix">
+            <markdown file="../LICENSE.md" />
         </chapter>
     </parts>
 </document>
