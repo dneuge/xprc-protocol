@@ -31,6 +31,13 @@ The protocol is not in a stable state yet. Please refer to the [issues list](htt
 
 Please refer to the dedicated [contribution guidelines](CONTRIBUTING.md).
 
+Documentation source code is mostly kept inside the [`src`](src) directory. The document structure is controlled through [`document.xml`](src/document.xml) (complemented by a [schema](src/document.xsd)) whereas the individual parts are provided in two ways:
+
+- [commands](src/commands) are described in XML (according to the [command schema](src/command.xsd)) to ensure uniform templating
+- other sections are written in Markdown (`.md`) format
+
+Tooling is then used to compile HTML and PDF (via LaTeX) files from those sources.
+
 ## History
 
 X-Plane offered a UDP network interface for a long time already but any more extensive control of the sim required
