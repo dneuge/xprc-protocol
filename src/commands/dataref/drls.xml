@@ -40,21 +40,21 @@
     </responses>
     <examples>
         <example>
-            <ctos>ABCD DRLS</ctos>
-            <stoc>+ACK ABCD 1836</stoc>
-            <stoc>+ABCD 2642 int,float,double;rw;sim/some/ref</stoc>
-            <stoc>+ABCD 2642 blob;ro;something/else</stoc>
-            <stoc>-ABCD 2642 int;rw;what/ever</stoc>
+            <client>ABCD DRLS</client>
+            <server>+ACK ABCD 1836</server>
+            <server>+ABCD 2642 int,float,double;rw;sim/some/ref</server>
+            <server>+ABCD 2642 blob;ro;something/else</server>
+            <server>-ABCD 2642 int;rw;what/ever</server>
         </example>
         <example>
-            <ctos>BBBB DRLS sim/some/ref;non/existent</ctos>
-            <stoc>+ACK BBBB 3520</stoc>
-            <stoc>-BBBB 3526 int,float,double;rw;sim/some/ref</stoc>
+            <client>BBBB DRLS sim/some/ref;non/existent</client>
+            <server>+ACK BBBB 3520</server>
+            <server>-BBBB 3526 int,float,double;rw;sim/some/ref</server>
         </example>
         <example>
-            <ctos>FFFF DRLS non/existent</ctos>
-            <stoc>+ACK FFFF 6789</stoc>
-            <stoc>-ACK FFFF 6800</stoc>
+            <client>FFFF DRLS non/existent</client>
+            <server>+ACK FFFF 6789</server>
+            <server>-ACK FFFF 6800</server>
         </example>
     </examples>
 </command>

@@ -172,8 +172,8 @@
 
     <xs:complexType name="Example">
         <xs:choice maxOccurs="unbounded">
-            <xs:element name="ctos" type="ExampleClientToServer" />
-            <xs:element name="stoc" type="ExampleServerToClient" />
+            <xs:element name="client" type="ExampleClientToServer" />
+            <xs:element name="server" type="ExampleServerToClient" />
             <xs:element name="remark" type="Markdown" />
         </xs:choice>
     </xs:complexType>

@@ -60,23 +60,23 @@
     </notes>
     <examples>
         <example>
-            <ctos>ABCD DRQV;freq=10f int:some/ref;blob:some/ref;float:other/value</ctos>
-            <stoc>+ACK ABCD 15210</stoc>
-            <stoc>+ABCD 15210 5;2,0104;3.43</stoc>
-            <stoc>+ABCD 15534 5;2,0104;3.42</stoc>
-            <stoc>+ABCD 15784 2;2,0001;3.43</stoc>
-            <ctos>ABCD TERM <remark>channel/command requested to be terminated</remark></ctos>
-            <stoc>-ACK ABCD 15821</stoc>
+            <client>ABCD DRQV;freq=10f int:some/ref;blob:some/ref;float:other/value</client>
+            <server>+ACK ABCD 15210</server>
+            <server>+ABCD 15210 5;2,0104;3.43</server>
+            <server>+ABCD 15534 5;2,0104;3.42</server>
+            <server>+ABCD 15784 2;2,0001;3.43</server>
+            <client>ABCD TERM <remark>channel/command requested to be terminated</remark></client>
+            <server>-ACK ABCD 15821</server>
             <remark>channel closed by just acknowledging termination request</remark>
         </example>
         <example>
-            <ctos>xyz1 DRQV;times=5 int:what/ever</ctos>
-            <stoc>+ACK xyz1 7234</stoc>
-            <stoc>+xyz1 7235 3</stoc>
-            <stoc>+xyz1 7268 3</stoc>
-            <stoc>+xyz1 7301 2</stoc>
-            <stoc>+xyz1 7315 3</stoc>
-            <stoc>-xyz1 7329 1</stoc>
+            <client>xyz1 DRQV;times=5 int:what/ever</client>
+            <server>+ACK xyz1 7234</server>
+            <server>+xyz1 7235 3</server>
+            <server>+xyz1 7268 3</server>
+            <server>+xyz1 7301 2</server>
+            <server>+xyz1 7315 3</server>
+            <server>-xyz1 7329 1</server>
             <remark>channel closed with last value</remark>
         </example>
     </examples>
