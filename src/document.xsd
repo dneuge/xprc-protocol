@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="document" type="Document">
+        <xs:annotation>
+            <xs:documentation>
+                Describes the document structure.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="Document">
+        <xs:all>
+            <xs:element name="parts" type="Parts">
+                <xs:annotation>
+                    <xs:documentation>
+                        Lists all parts to assemble the document from.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="MarkdownFile">
+        <xs:attribute name="file" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    Relative path to the Markdown-formatted file to be included.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Commands">
+        <xs:attribute name="group" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    Directory name of the command group to be included.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Parts">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="chapter" type="Chapter">
+                <xs:annotation>
+                    <xs:documentation>
+                        Groups one or more parts into a new (sub-)chapter.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="markdown" type="MarkdownFile">
+                <xs:annotation>
+                    <xs:documentation>
+                        Includes the specified Markdown file, importing any sub-structure from the external file.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="commands" type="Commands">
+                <xs:annotation>
+                    <xs:documentation>
+                        Includes the specified command group.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="Chapter">
+        <xs:simpleContent>
+            <xs:extension base="Parts">
+                <xs:attribute name="title" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            title/headline describing the chapter
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>
