@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="../../command.xsd">
     <mnemonic><m>D</m>ata<m>R</m>ef <m>L</m>i<m>s</m>t</mnemonic>
     <description>
-        Lists information about available DataRefs. The command allows retrieval of information about specific datarefs as well as listing all DataRefs known to X-Plane (unspecific). Unspecific retrieval depends on X-Plane 12.04 APIs or workarounds in case of previous versions. If unspecific retrieval is not supported, servers should reply with an error status.
+        Lists information about available datarefs. The command allows retrieval of information about specific datarefs as well as listing all datarefs known to X-Plane (unspecific). Unspecific retrieval depends on X-Plane 12.04 APIs or workarounds in case of previous versions. If unspecific retrieval is requested but not supported, servers should reply with an error status.
     </description>
     <options>
         <option name="rwCheck" default="simulator">
@@ -12,30 +12,30 @@
             </description>
             <constants>
                 <constant name="simulator">
-                    use the flag published on X-Plane (may give a false `ro` indication for DataRefs claimed by XPRC)
+                    use the flag published on X-Plane (may give a false `ro` indication for datarefs claimed by XPRC)
                 </constant>
                 <constant name="server">
-                    if the DataRef is claimed by XPRC, check for general availability in XPRC
+                    if the dataref is claimed by XPRC, check for general availability in XPRC
                 </constant>
                 <constant name="session">
-                    if the DataRef is claimed by XPRC, check for the current session
+                    if the dataref is claimed by XPRC, check for the current session
                 </constant>
             </constants>
         </option>
     </options>
     <parameters>
-        <parameter multiplicity="*">Dataref name (string) to retrieve information for. If none are provided, all available datarefs are listed.</parameter>
+        <parameter multiplicity="*">Dataref name (string) to retrieve information for. If no names are provided, all available datarefs are listed (unspecific query).</parameter>
     </parameters>
     <responses>
         <response>Status: `ACK` if requested listing is technically possible, `ERR` if not</response>
         <response>
             one dataref definition per message; fields separated by semicolon:
-            1. Comma-separated list of supported data types (see DataRef Types)
+            1. comma-separated list of supported data types (see DataRef Types)
             2. `ro` if indicated as read-only, `rw` if indicated as writable
             3. name of DataRef
         </response>
         <remark>
-            If information about specific datarefs has been requested but some (or all) of them are not found within X-Plane, the returned list may be incomplete. A completely empty result (`+ACK` followed by `-ACK`) is also possible in that case.
+            If information about specific datarefs has been requested but some (or all) of them are not found within X-Plane, the returned list may be incomplete. A completely empty result (e.g. `+ACK` followed by `-ACK`) is also possible in that case.
         </remark>
     </responses>
     <examples>
@@ -55,6 +55,10 @@
             <client>FFFF DRLS non/existent</client>
             <server>+ACK FFFF 6789</server>
             <server>-ACK FFFF 6800</server>
+        </example>
+        <example>
+            <client>UUUU DRLS</client>
+            <server>-ERR UUUU 5710 unspecific queries are not supported</server>
         </example>
     </examples>
 </command>

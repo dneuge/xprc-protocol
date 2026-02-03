@@ -3,7 +3,7 @@
     xsi:noNamespaceSchemaLocation="../../command.xsd">
     <mnemonic><m>D</m>ata<m>R</m>ef <m>Q</m>uery <m>V</m>alues</mnemonic>
     <description>
-        Retrieves the momentary values of requested DataRefs.
+        Retrieves the momentary values of requested datarefs.
     </description>
     <options>
         <option name="freq" default="1000ms">
@@ -13,9 +13,9 @@
                 <suffix name="f">frames</suffix>
             </suffixes>
         </option>
-        <option name="times" defaultRemark="infinite, until terminated">
+        <option name="times" defaultRemark="infinite, until terminated" variableName="n">
             <description>
-                number of times to update
+                number of times to update; command will terminate after `n` retrievals
             </description>
         </option>
         <option name="phase" defaultRemark="don't care">
@@ -35,24 +35,24 @@
     <parameters>
         <subparameters multiplicity="+" delimiter=":">
             <parameter>requested type</parameter>
-            <parameter>name of the requested DataRef</parameter>
+            <parameter>name of the requested dataref</parameter>
         </subparameters>
     </parameters>
     <responses>
         <response>
-            Status
+            status
             * If any dataref cannot be found or any type is unavailable: `ERR`
             * Otherwise: `ACK`
         </response>
         <response>
-            Value at referenced time
-            * see DataRef type descriptions for value encoding
+            values at referenced time
             * semicolon-separated in same order as requested
+            * see dataref type descriptions for value encoding
         </response>
     </responses>
     <notes>
         <note>
-            If a dataref provides multiple types, multiple of them can be requested with the same command (see example).
+            If a dataref provides multiple types, multiple of them can be requested with the same command by listing each type as a separate dataref (see example).
         </note>
         <note>
             The first value will be provided as soon as possible (not delayed by `freq` option).
@@ -65,7 +65,7 @@
             <server>+ABCD 15210 5;2,0104;3.43</server>
             <server>+ABCD 15534 5;2,0104;3.42</server>
             <server>+ABCD 15784 2;2,0001;3.43</server>
-            <client>ABCD TERM <remark>channel/command requested to be terminated</remark></client>
+            <client>ABCD TERM<remark>number of repetitions was not specified, client requests indefinite command to be terminated</remark></client>
             <server>-ACK ABCD 15821</server>
             <remark>channel closed by just acknowledging termination request</remark>
         </example>
@@ -77,7 +77,7 @@
             <server>+xyz1 7301 2</server>
             <server>+xyz1 7315 3</server>
             <server>-xyz1 7329 1</server>
-            <remark>channel closed with last value</remark>
+            <remark>5 repetitions had been requested, channel closed with last retrieved value</remark>
         </example>
     </examples>
 </command>
