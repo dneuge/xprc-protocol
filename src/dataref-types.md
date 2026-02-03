@@ -1,4 +1,4 @@
-# Dataref Types
+## Dataref Types
 
 X-Plane datarefs can be overloaded, offering multiple types (with different values) under the same name. Hence, types
 must always be specified together with datarefs for retrieval, manipulation or registration. This also allows early
