@@ -96,6 +96,7 @@
         <xs:attribute name="name" type="xs:string" />
         <xs:attribute name="default" type="xs:string" />
         <xs:attribute name="defaultRemark" type="xs:string" />
+        <xs:attribute name="variableName" type="xs:string" />
     </xs:complexType>
 
     <xs:complexType name="OptionSuffix">
