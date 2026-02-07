@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="CMTR" title="Trigger Command" group="xpcommand"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>C</m>o<m>m</m>mand <m>T</m><m>r</m>igger</mnemonic>
+    <description>
+        Triggers the given X-Plane command(s).
+
+        The command can also be held "down" temporarily in which case an unknown number of retrigger events may occur.
+        The effect of such held commands is defined by X-Plane and individual command implementations. X-Plane commands
+        held during XPRC command termination are released on the next flight-loop cycle.
+
+        If a specific number of trigger events is needed, the command should be immediately released again
+        (`hold` not set or `0`) and retriggered via `times=n` and an appropriate `repeatFreq`. For held commands, it is
+        not possible to monitor the actual number of resulting `TRIGGER` events.
+
+        The reason for this behavior is that X-Plane API submits three events to commands but allows only two of them
+        to be directly controlled:
+
+        * `XPLMCommandBegin` starts holding the command, leading to event `xplm_CommandBegin` (XPRC: `HOLD`)
+        * `XPLMCommandEnd` stops holding it, leading to `xplm_CommandEnd` (XPRC: `RELEASE`)
+
+        The event `xplm_CommandContinue` (XPRC: `TRIGGER`) is issued by X-Plane
+        * once when the command begins to be held
+        * repeatedly while the command is being held, after an initial delay
+
+        How often X-Plane triggers can only be controlled by immediately releasing the command again (or using
+        `XPLMCommandOnce` on the API).
+    </description>
+    <options>
+        <option name="hold" variableName="X" default="0f" defaultRemark="trigger with immediate release, like `XPLMCommandOnce`">
+            <description>time to hold the command</description>
+            <suffixes>
+                <suffix name="ms">
+                    milliseconds
+
+                    Command will be released on the first frame matching or exceeding the requested time measured
+                    from start of cycle or when a repetition occurs (whichever is first).
+                </suffix>
+                <suffix name="f">
+                    frames
+
+                    Command will be released on the exact frame requested or when a repetition occurs.
+                </suffix>
+            </suffixes>
+        </option>
+        <option name="repeatFreq" variableName="X" default="1f">
+            <description>
+                repeat in intervals of X
+
+                Repetition intervals are based on time passed since start of command (no clock skew).
+            </description>
+            <suffixes>
+                <suffix name="ms">milliseconds</suffix>
+                <suffix name="f">frames</suffix>
+            </suffixes>
+        </option>
+        <option name="times" variableName="n" default="1" defaultRemark="only once">
+            <description>
+                repeat given number of times
+
+                * set to `infinite` for infinite repeat (only stopped by `TERM` or disconnect)
+            </description>
+        </option>
+        <option name="monitor" default="cycle">
+            <description>
+                controls feedback about command invocations
+            </description>
+            <constants>
+                <constant name="holdRelease">
+                    notifies about each invocation of:
+
+                    * `HOLD` (according to X-Plane API `XPLMCommandBegin`)
+                    * `RELEASE` (according to X-Plane API `XPLMCommandEnd`)
+                </constant>
+                <constant name="cycle">
+                    notifies only about each start of repetition by `CYCLE` (equal to `HOLD` but without `RELEASE`)
+                </constant>
+                <constant name="none">
+                    disables monitoring
+                </constant>
+            </constants>
+        </option>
+        <!-- TODO: add phase option? -->
+    </options>
+    <parameters>
+        <parameter multiplicity="+">
+            command name
+
+            Providing multiple command names will cause them to be triggered within the same frame.
+            All commands are triggered in the specified order.
+            If commands are being held (using `XPLMCommandBegin` on X-Plane API) they will be released in reverse order.
+        </parameter>
+    </parameters>
+    <responses>
+        <response>
+            status
+            * If any command cannot be found: `ERR`
+            * Otherwise: `ACK`
+        </response>
+        <response>
+            Depending on `monitor` option:
+            * if `monitor=holdRelease`:
+              * `HOLD` as `XPLMCommandBegin` is being invoked by the server
+              * `RELEASE` as `XPLMCommandEnd` is being invoked by the server
+            * if `monitor=cycle`:
+              * `CYCLE` on each repetition as `XPLMCommandBegin` is being invoked by the server
+        </response>
+    </responses>
+    <notes>
+        <note>
+            While repetition intervals are based on the original start of XPRC command, the time of releasing the
+            XP command when using a time-based `hold` option is always measured relative to the start of holding
+            the XP command (not the time of the XPRC command having been received) to not shorten the requested
+            duration.
+        </note>
+    </notes>
+</command>

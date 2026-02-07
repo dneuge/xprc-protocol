@@ -15,7 +15,7 @@
         <chapter title="DataRefs">
             <commands group="dataref" />
         </chapter>
-        <chapter title="Commands">
+        <chapter title="X-Plane Commands">
             <commands group="xpcommand" />
         </chapter>
         <chapter title="Appendix">

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="CMRG" title="Register Command" group="xpcommand"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>C</m>o<m>m</m>mand <m>R</m>e<m>g</m>ister</mnemonic>
+    <!-- TODO: SDK Docs say: "You can register a single callback both before and after a command."
+           What happens if multiple command handlers are attempted to be registered and unregistered in another order? (Later registration ignored? Crash?)
+           Can previous registration outside of XPRC be detected?
+           Should XPRC handle multiple registrations internally or fail the command? -->
+    <description>
+        Registers a new handler for the specified X-Plane command.
+
+        The command will be created if it does not already exist in X-Plane. Each received call will be forwarded.
+        XPRC does not react to the invocation on its own. The handler will be unregistered on termination.
+    </description>
+    <options>
+        <option name="monitor" default="all">
+            <description>
+                controls feedback about command invocations
+            </description>
+            <constants>
+                <constant name="all">notifications are sent for all events</constant>
+                <constant name="trigger">notifications will only be sent for "trigger" events (not "hold" or "release")</constant>
+                <constant name="holdRelease">notifications will only be sent for "hold" and "release" events (omitting "trigger" events)</constant>
+            </constants>
+        </option>
+        <option name="propagate" default="false">
+            <description>
+                whether to allow or stop propagation to further command handlers
+            </description>
+            <constants>
+                <constant name="true">other handlers can continue processing the events</constant>
+                <constant name="false">events are stopped from propagation to other handlers</constant>
+            </constants>
+        </option>
+        <option name="phase" default="before">
+            <description>
+                when to be called
+            </description>
+            <constants>
+                <constant name="before">before X-Plane-internal handler</constant>
+                <constant name="after">after X-Plane-internal handler</constant>
+            </constants>
+        </option>
+    </options>
+    <parameters>
+        <parameter>command name</parameter>
+        <parameter multiplicity="?">
+            command description (can only be set during initial command creation)
+        </parameter>
+    </parameters>
+    <responses>
+        <response>
+            status
+            * If registration fails: `ERR`
+            * Otherwise: `ACK`
+        </response>
+        <response>
+            On each invocation, according to `monitor` option:
+            * `HOLD` as command starts being held (`xplm_CommandBegin` being received by server)
+            * `TRIGGER` as command is being triggered (`xplm_CommandContinue` being received by server)
+            * `RELEASE` as command is being released (`xplm_CommandEnd` being received by server)
+        </response>
+    </responses>
+</command>

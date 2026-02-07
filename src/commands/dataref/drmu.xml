@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="DRMU" title="Manipulate DataRefs Uncontrolled" group="dataref"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>D</m>ata<m>R</m>ef <m>M</m>anipulate <m>U</m>ncontrolled</mnemonic>
+    <description>
+        Sets datarefs to the requested values, either immediately or progressively over time.
+        "Uncontrolled" means that apart from the initial value no feedback will be incorporated into the (intermediate)
+        values being set (as compared to a PID controller or similar).
+        By not incorporating any feedback, simultaneous manipulation of values may result in noticeably
+        (possibly unstable) jumping values.
+
+        Depending on server implementation, datarefs that are owned by the XPRC server may be manipulated asynchronously
+        outside X-Plane flight loop phases but generally only if:
+
+        * application is immediate, no timing is requested; i.e. `method=immediate` and `repeatFreq` is not set/single run
+        * all datarefs to be manipulated are owned by the same XPRC server instance
+
+        Server implementations are recommended but not required to enable asynchronous manipulation in these cases.
+    </description>
+    <options>
+        <option name="repeatFreq" variableName="X" default="0" defaultRemark="single run only">
+            <description>repeat in intervals of X</description>
+            <suffixes>
+                <suffix name="ms">milliseconds</suffix>
+                <suffix name="f">frames</suffix>
+            </suffixes>
+        </option>
+        <!-- TODO: currently no parameter for number of repetitions is specified; add?
+        <option name="times" defaultRemark="infinite, until terminated" variableName="n">
+            <description>
+                number of times to update; command will terminate after `n` retrievals
+            </description>
+        </option>
+        -->
+        <option name="method" default="immediate">
+            <description>
+                how to set the value
+            </description>
+            <constants>
+                <constant name="immediate">
+                    immediately set to the requested value (only valid option for blobs)
+                </constant>
+                <constant name="linear">
+                    linear modification from original to requested value
+                </constant>
+            </constants>
+        </option>
+        <!-- TODO: currently not implemented (was prepared but commented out - still needed?), marked "under review for removal" in latest pre-XML spec
+        <option name="methodFreq" variableName="X" default="1f" defaultRemark="each frame">
+            <description>set progressively in intervals of X (no effect if `method` is `immediate`)</description>
+            <suffixes>
+                <suffix name="ms">milliseconds</suffix>
+                <suffix name="f">frames</suffix>
+            </suffixes>
+        </option>
+        -->
+        <option name="duration" default="2500ms">
+            <description>
+                controls the duration of each manipulation cycle, no effect if `method` is `immediate`
+
+                Actual duration depends on flight loop calls (frames in XP).
+            </description>
+            <suffixes>
+                <suffix name="ms">milliseconds</suffix>
+                <suffix name="f">frames</suffix>
+            </suffixes>
+        </option>
+        <option name="monitor" default="none">
+            <description>
+                controls if and which feedback should be sent back to the channel
+
+                Array ranges are based on the requested start index and limited to the length used, only partial arrays
+                will be returned for `set` mode. `get` mode may return a shorter actual length (as remaining from the
+                requested index) depending on actual dataref content.
+            </description>
+            <constants>
+                <constant name="set">
+                    send the currently set value(s) on each update
+                </constant>
+                <constant name="get">
+                    sends what the dataref actually returns after setting on each update
+                </constant>
+                <constant name="none">
+                    only acknowledge command and close channel when done
+                </constant>
+            </constants>
+        </option>
+        <option name="phase" defaultRemark="don't care">
+            <description>
+                when to write the value
+            </description>
+            <constants>
+                <constant name="0">
+                    before flight model
+                </constant>
+                <constant name="1">
+                    after flight model
+                </constant>
+            </constants>
+        </option>
+    </options>
+    <parameters>
+        <subparameters multiplicity="+" delimiter=":">
+            <parameter>value type</parameter>
+            <parameter>name of the requested dataref</parameter>
+            <parameter multiplicity="?" condition="optionally, if array or blob">
+                `[i]` to set only values from index `i` (`i=0` is the first element; default=`0`)
+            </parameter>
+            <parameter>
+                value(s) to set, encoded as explained in the Dataref Types section
+
+                Array ranges can be written to by only providing a partial array; e.g. addressing index `[4]` on a
+                10 item array and passing a value of length `2` will only manipulate indexes 4 and 5 while leaving
+                0..3 and 6..9 unchanged.
+            </parameter>
+            <parameter multiplicity="?">
+                value(s) to start from, encoded as explained in the DataRef Types section (optional)
+
+                * If not set, the start value will be read from actual dataref at each start of repetition.
+                * Array ranges are handled in the same way as the target value parameter, length has to match.
+            </parameter>
+        </subparameters>
+    </parameters>
+    <responses>
+        <response>
+            status
+            * If any dataref cannot be found or any type is unavailable: `ERR`
+            * Otherwise: `ACK`
+        </response>
+        <response>
+            Only if `monitor` was requested: intermediate values at referenced time
+            * semicolon-separated in same order as requested
+            * see dataref type descriptions for value encoding
+        </response>
+    </responses>
+    <notes>
+        <note>
+            When choosing another `method` than `immediate`, all intermediate values will be calculated relative to the
+            time passed since start of command/repetition.
+        </note>
+        <note>
+            Repetition intervals are based on time passed since start of command (no clock skew).
+        </note>
+        <note>
+            If base values are not fixed, they will be read on each first iteration of a repetition. However, the values
+            to be set by the same iteration are already calculated with the time passed since calculated start of the
+            command/repetition.
+        </note>
+        <note>
+            If base values are fixed, the initial base value is already outdated by the time a new repetition is
+            initialized; it will be adjusted according to the time passed since calculated restart.
+        </note>
+        <note>
+            If a repetition interval (`repeatFreq`) is met before the previous cycle’s `duration` concludes, the
+            previous cycle's end value will not be set. Instead the new cycle starts applying values seamlessly as per
+            the previous note.
+        </note>
+        <note>
+            Datarefs flagged as read-only through X-Plane API may (and will be attempted to) still be written to.
+            Internally hosted datarefs (see `DRCI`) are known to be actually restricted and are checked during command
+            creation but not afterwards.
+            During creation, internally write-protected DataRefs will fail command creation.
+        </note>
+        <note>
+            When accessing internally hosted datarefs (see `DRCI`):
+
+            * Internal availability of datarefs is only checked during command creation.
+            * If a dataref becomes unclaimed, the dataref will still be attempted to be accessed through X-Plane
+              (the command continues to run).
+            * If a dataref becomes claimed (again), the dataref will still be accessed through X-Plane. Write-protected
+              datarefs will fail to be written to unless the command is restarted.
+        </note>
+    </notes>
+    <examples>
+        <example>
+            <client>ABCD DRMU;repeatFreq=5000ms int:some/value:2;float:other/name:3.2</client>
+            <server>+ACK ABCD 5412<remark>command stays active and sets both values immediately every 5 seconds until terminated</remark></server>
+            <server>ABCD TERM<remark>also stops periodic resets</remark></server>
+            <server>-ACK ABCD 15741</server>
+        </example>
+        <example>
+            <client>xyz1 DRMU;method=linear;monitor=set;duration=1000ms int:some/ref:1000</client>
+            <server>+ACK xyz1 6402</server>
+            <server>+xyz1 6432 102<remark>server sends monitored values as they are being set</remark></server>
+            <server>+xyz1 6480 243</server>
+            <server>+xyz1 6504 310</server>
+            <later />
+            <server>+xyz1 7413 987</server>
+            <server>-xyz1 7435 1000</server>
+            <remark>
+                target value (`1000`) has been set after requested `duration` of `1000ms`, channel closed (no repetition)
+            </remark>
+        </example>
+    </examples>
+</command>

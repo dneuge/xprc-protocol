@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="DRCI" title="Claim DataRef Immediate" group="dataref"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>D</m>ata<m>R</m>ef <m>C</m>laim <m>I</m>mmediate</mnemonic>
+    <description>
+        Attempts to create the specified dataref within X-Plane. Claimed datarefs need to be released through
+        channel termination before redefinition; definitions cannot be shared between channels or sessions.
+
+        If the dataref is manipulated, accepted (optionally immediately adjusted) input can be retrieved
+        from the dataref again. The updated value is sent to the channel asynchronously.
+
+        "Immediate" means two things:
+        * value changes are direct, not adjusted over time (other than input to a PID controller)
+        * value changes are not held back for external confirmation
+
+        The dataref can be accessed from X-Plane as well as via all other XPRC commands (e.g. `DRQV` and `DRMU`,
+        it is also seen by `DRLS`).
+
+        A single registration can be used for multiple types, as long as a compatible conversion method exists.
+    </description>
+    <options>
+        <option name="echo" default="other">
+            <!-- TODO: rename to "monitor"? -->
+            <description>controls if and whose values should be forwarded to the channel when set</description>
+            <constants>
+                <constant name="all">notify about all values being set, regardless of source</constant>
+                <constant name="other">notify only about values received through X-Plane or XPRC sessions other than the current one</constant>
+                <constant name="xplane">notify only about values received through X-Plane (updates from XPRC are not forwarded)</constant>
+                <constant name="none">disables all notifications</constant>
+            </constants>
+        </option>
+        <option name="intConv" default="round">
+            <description>
+                defines how float/double values are converted to an integer if mixed types are in use and a floating point number is being set
+
+                Mutually exclusive to `step` settings.
+            </description>
+            <constants>
+                <constant name="round">standard rounding (floor &lt; .5, ceil ≥ .5)</constant>
+                <constant name="floor">always choose next lower integer</constant>
+                <constant name="ceil">always choose next higher integer</constant>
+            </constants>
+        </option>
+        <!-- TODO: range, rangeFit, step, stepFit need to be investigated again; currently not implemented
+        <option name="range" defaultRemark="unrestricted">
+            <description>
+                Defines the accepted value range (not available for blob type).
+
+                Format: (separated by colon)
+                1. definition value type (`int`, `float` or `double`)
+                   * can be omitted to continue with last defined type
+                2. minimum value (inclusive) or empty if unrestricted
+                3. maximum value (inclusive) or empty if unrestricted
+
+                If the dataref type is an array, ranges can optionally be defined per item, separated by comma; either:
+                * a single definition applies to all items
+                * multiple definitions apply only to the according item index
+                  * length has to match
+
+                Example: `int:-2:5,double::,double::1.234,float:-5.4321:,0.1:0.4,:0.9,-0.5:,:`
+            </description>
+        </option>
+        <option name="rangeFit" default="limit">
+            <description>
+                defines if and how values should be made to fit within value range
+
+                If the dataref type is an array, ranges can optionally be defined per item, separated by comma; either:
+                * a single definition applies to all items
+                * multiple definitions apply only to the according item index
+                  * length has to match
+            </description>
+            <constants>
+                <constant name="reject">
+                    out of range values are ignored
+                </constant>
+                <constant name="limit">
+                    out of range values are set to minimum/maximum values instead
+                </constant>
+                <constant name="wrap">
+                    range is periodic, out of range values are adjusted to primary range
+
+                    Range must be fully specified, partial definition is not allowed.
+
+                    Examples:
+                    * range is between 0 and 2, input is 3.4 => 1.4 will be set (2.0 + 1.4 = 3.4)
+                </constant>
+            </constants>
+        </option>
+        <option name="step" defaultRemark="none">
+            <description>
+                Defines the accepted step size (not available for blob type). Steps start from minimum range value, if set,
+                else they are based on maximum value. If no range is set, steps are based on 0 origin.
+
+                Format: *`type`*`:`*`stepSize`* \
+                Examples: `int:2` or `double:0.25`
+
+                If the dataref type is an array, ranges can optionally be defined per item, separated by comma; either:
+                * a single definition applies to all items
+                * multiple definitions apply only to the according item index
+                  * length has to match
+                  * types can be continued or changed in between (applying to all following), e.g.:
+                    * `int:2,1,5`
+                    * `int:2,double:0.9,1.2`
+                  * steps can be disabled for specific items using `*` instead
+            </description>
+        </option>
+        <option name="stepFit" default="closest">
+            <description>
+                defines how values are adjusted to match steps, if step size is defined
+
+                If the dataref type is an array, ranges can optionally be defined per item, separated by comma; either:
+                * a single definition applies to all items
+                * multiple definitions apply only to the according item index
+                  * length has to match
+            </description>
+            <constants>
+                <constant name="reject">
+                    values not exactly matching a step are ignored (only available for `int` type)
+                </constant>
+                <constant name="closest">
+                    adjusts the value to the closest step
+                </constant>
+                <constant name="lower">
+                    adjusts the value to the lower step
+                </constant>
+                <constant name="upper">
+                    adjusts the value to the upper step
+                </constant>
+            </constants>
+        </option>
+        -->
+        <option name="writable" default="all">
+            <description>
+                controls who is allowed to submit value changes
+            </description>
+            <constants>
+                <constant name="all">
+                    X-Plane and all XPRC sessions are allowed to write
+                </constant>
+                <constant name="xprc">
+                    all XPRC sessions of the same server instance are allowed to write, X-Plane can only read
+                </constant>
+                <constant name="session">
+                    only the current XPRC session is allowed to write, other sessions and X-Plane can only read
+                </constant>
+            </constants>
+        </option>
+    </options>
+    <parameters>
+        <subparameters delimiter=":">
+            <subparameters multiplicity="+" delimiter=",">
+                <parameter>
+                    value type(s)
+
+                    Only compatible types may be specified, without repetition. Single numbers and arrays cannot be
+                    mixed.
+
+                    Compatible:
+                    * `int`, `float`, `double` *or*
+                    * `int[]`, `float[]`
+
+                    `blob` cannot be converted and thus is not compatible with any other types.
+
+
+                </parameter>
+            </subparameters>
+            <parameter>
+                name of the dataref to be claimed
+
+                For all requested types, the dataref must not exist yet or must already have been registered
+                (and released) through XPRC earlier.
+            </parameter>
+            <parameter condition="required if array or blob; must be omitted for single-value types">
+                length of the array/blob
+            </parameter>
+        </subparameters>
+    </parameters>
+    <responses>
+        <response>
+            status
+
+            * If dataref cannot be claimed or types are different than already claimed: `ERR`
+            * Otherwise: `ACK`
+        </response>
+        <response>
+            When the dataref value has been touched, sent according to `echo` option:
+            * value(s) at referenced time
+              * see dataref type descriptions for value encoding
+              * if the dataref has been registered for multiple types, values are separated by semicolon
+                * in order specified as # in type overview (note: **not** matching order from command parameter)
+        </response>
+    </responses>
+    <examples>
+        <example>
+            <client>AAAA DRCI int:my/own/dataref</client>
+            <server>+ACK AAAA 304</server>
+            <client>BBBB DRMU int:my/own/dataref:2</client>
+            <remark>default `echo=other` does not notify about this update on channel `AAAA` as it was issued from same session</remark>
+            <server>-ACK BBBB 3150</server>
+            <remark>dataref is set through X-Plane (e.g. by another plugin)</remark>
+            <server>+AAAA 6432 5</server>
+            <remark>dataref is set by another XPRC session</remark>
+            <server>+AAAA 9842 10</server>
+        </example>
+        <example>
+            <client>CCCC DRCI;echo=all double,float:some/other/value</client>
+            <server>+ACK CCCC 197</server>
+            <client>DDDD DRMU float:my/own/dataref:2.643</client>
+            <server>+CCCC 2.643023;2.6430010325<remark>note that the order is `float,double` according to # column in data type spec</remark></server>
+            <server>-ACK DDDD 2463</server>
+        </example>
+    </examples>
+</command>

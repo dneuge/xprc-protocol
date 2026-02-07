@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="CMHD" title="Hold Command" group="xpcommand"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>C</m>o<m>m</m>mand <m>H</m>ol<m>d</m></mnemonic>
+    <description>
+        Holds the given X-Plane command(s) until terminated.
+
+        In X-Plane API this corresponds to `XPLMCommandBegin` with `XPLMCommandEnd` only sent on `TERM` or disconnect.
+        X-Plane (on its own) will continuously issue trigger events while being held.
+
+        Note that XPRC command termination may be acknowledged before actual release of the X-Plane command being held.
+    </description>
+    <parameters>
+        <parameter multiplicity="+">
+            command name
+
+            Providing multiple command names will cause them to be held and released within the same frames.
+            All commands begin to be held in the specified order and will be released in reverse order.
+        </parameter>
+    </parameters>
+    <responses>
+        <response>
+            status
+            * If any command cannot be found: `ERR`
+            * Otherwise: `ACK`
+        </response>
+    </responses>
+</command>
