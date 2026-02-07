@@ -175,6 +175,7 @@
         <xs:choice maxOccurs="unbounded">
             <xs:element name="client" type="ExampleClientToServer" />
             <xs:element name="server" type="ExampleServerToClient" />
+            <xs:element name="later" type="ExampleLater" />
             <xs:element name="remark" type="Markdown" />
         </xs:choice>
     </xs:complexType>
@@ -205,6 +206,15 @@
         <xs:complexContent>
             <xs:extension base="ExampleMessage" />
         </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ExampleLater">
+        <xs:annotation>
+            <xs:documentation>
+                Some time passes between messages.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:all />
     </xs:complexType>
 
     <!--
