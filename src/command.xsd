@@ -124,16 +124,19 @@
 
     <xs:complexType name="SubParameters">
         <xs:sequence>
-            <xs:element name="parameter" type="Parameter" maxOccurs="unbounded" />
+            <xs:element name="subparameters" type="SubParameters" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="delimiter" type="xs:string" />
         <xs:attribute name="multiplicity" default="1" type="ParameterMultiplicity" />
+        <xs:attribute name="condition" type="xs:string" />
     </xs:complexType>
 
     <xs:complexType name="Parameter">
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attribute name="multiplicity" default="1" type="ParameterMultiplicity" />
+                <xs:attribute name="condition" type="xs:string" />
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
