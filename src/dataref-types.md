@@ -19,23 +19,26 @@ Value encodings are human-readable, following the basic premise of text mode bei
 Note that X-Plane's plugin API (XPLM) also has an "unknown" type (a placeholder for any type unsupported by current
 API) which is omitted from XPRC as it has no relevant use outside X-Plane internals.
 
-|  Type name | Description                           | Encoding                                                      |
-|------------|---------------------------------------|---------------------------------------------------------------|
-| `int`      | 32 bit integer                        | human-readable string                                         
-                                                       Example: `123` |
-| `float`    | 32 bit floating-point value           | human-readable string                                         
-                                                       Example: `-1.63e-3` |
-| `double`   | 64 bit floating-point value           | human-readable string                                         
-                                                       Example: `-1.63e-3` |
-| `int[]`    | array of 32 bit integers              | Comma-separated:                                              
-                                                       1. array length as human-readable string
-                                                       2. `int` values as human-readable strings (see above)
-                                                       Example: `3,1,2,3` |
-| `float[]`  | array of 32 bit floating-point values | Comma-separated:
-                                                       1. array length as human-readable string
-                                                       2. `float` values as human-readable strings (see above)
-                                                       Example: `2,4.0,2.12` |
-| `blob`     | byte array (binary data)              | Comma-separated:
-                                                       1. blob size (decoded) as human-readable string
-                                                       2. Content as concatenated human-readable hexadecimal string
-                                                       Example: `4,A201FF0D` |
+Commands handling multiple types at once, such as `DRCI`, may use the index column (#) to establish a defined
+(non-customizable) order for values.
+
+| # | Type name | Description                               | Encoding                                                      |
+|---|-----------|-------------------------------------------|---------------------------------------------------------------|
+| 1 | `int`     | 32 bit integer                            | human-readable string
+                                                              Example: `123`                                                |
+| 2 | `float`   | 32 bit floating-point value               | human-readable string
+                                                              Example: `-1.63e-3`                                           |
+| 3 | `double`  | 64 bit floating-point value               | human-readable string
+                                                              Example: `-1.63e-3`                                           |
+| 4 | `int[]`   | array of 32 bit integers                  | Comma-separated:
+                                                              1. array length as human-readable string
+                                                              2. `int` values as human-readable strings (see above)
+                                                              Example: `3,1,2,3`                                            |
+| 5 | `float[]` | array of 32 bit floating-point values     | Comma-separated:
+                                                              1. array length as human-readable string
+                                                              2. `float` values as human-readable strings (see above)
+                                                              Example: `2,4.0,2.12`                                         |
+| 6 | `blob`    | byte array (binary data)                  | Comma-separated:
+                                                              1. blob size (decoded) as human-readable string
+                                                              2. Content as concatenated human-readable hexadecimal string
+                                                              Example: `4,A201FF0D`                                         |
