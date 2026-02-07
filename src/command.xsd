@@ -26,14 +26,14 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="options">
+            <xs:element name="options" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="option" type="Option" maxOccurs="unbounded" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="parameters" type="Parameters" />
+            <xs:element name="parameters" type="Parameters" minOccurs="0" />
             <xs:element name="responses">
                 <xs:complexType>
                     <xs:sequence>
@@ -54,7 +54,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="examples">
+            <xs:element name="examples" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="example" type="Example" maxOccurs="unbounded" />
