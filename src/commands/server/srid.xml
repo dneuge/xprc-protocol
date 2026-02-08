@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="SRID" title="Server Identify" group="server"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>S</m>e<m>r</m>ver <m>I</m><m>d</m>entify</mnemonic>
+    <description>
+        Queries basic information about the XPRC server.
+
+        The server will send key/value pairs. Keys must be unique per query, order does not matter.
+
+        While some information is mandatory to be provided by servers, clients should not expect them to always be
+        present as additional keys may only be added in future protocol revisions and thus may be missing from older
+        server implementations.
+
+        Mandatory: (to be sent exactly once)
+
+        * `name`: human-readable implementation name (do not interpret, use `id` for machine-readable information instead)
+        * `id`: server implementation ID (recommended for global uniqueness: based on an Internet domain, e.g. reversed domain name of repository or website)
+        * `version`: implementation-specific version string (interpret only as documented by server implementation)
+
+        Optional: (keys sent at most once)
+
+        * `apiversion`: XPLM version currently used by XPRC as returned by 'XPLMGetVersions'
+        * `website`: URL to website for more information about server implementation (not the server instance, meant for users; use `id` if identification is needed)
+        * `xpversion`: X-Plane version currently running XPRC as returned by 'XPLMGetVersions'
+        * keys prefixed `x-`: implementation-specific extra information (interpret only as documented by server implementation)
+          * servers should use a stable/compatible format once introduced and are recommended not to change meaning of keys
+          * clients/applications are recommended to not only check `id` but also `version` before interpreting these entries
+    </description>
+    <responses>
+        <response>
+            status, always `ACK`
+        </response>
+        <response>
+            Multiple messages, each holding a key/value pair as described above. Keys are separated by colon `:` from values.
+        </response>
+    </responses>
+    <examples>
+        <example>
+            <client>AAAA SRID</client>
+            <server>+ACK AAAA 6723</server>
+            <server>+AAAA 6723 id:org.codeberg.dneuge.xprc-example-server</server>
+            <server>+AAAA 6723 name:Fictional Example Implementation</server>
+            <server>+AAAA 6723 version:1.3 RC4</server>
+            <server>+AAAA 6723 website:https://codeberg.org/dneuge/xprc-example-server</server>
+            <server>-AAAA 6723 x-build-id:3612</server>
+        </example>
+    </examples>
+    <notes>
+        <note>
+            Servers may choose to either combine status responses with the first key-value pair or issue a blank `ACK`
+            for improved readability of the first pair as shown in the example.
+        </note>
+    </notes>
+</command>

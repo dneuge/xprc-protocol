@@ -9,8 +9,9 @@
         <markdown file="basic-syntax.md" />
         <markdown file="escape-sequences.md" />
         <markdown file="dataref-types.md" />
-        <chapter title="Capabilities"><!-- TODO: rename to "server", add commands to update server timestamp etc.? -->
-            <commands group="capabilities" />
+        <markdown file="feature-versioning.md" />
+        <chapter title="Server"><!-- TODO: add commands to get updated server timestamp etc.? -->
+            <commands group="server" />
         </chapter>
         <chapter title="DataRefs">
             <commands group="dataref" />
@@ -18,6 +19,7 @@
         <chapter title="X-Plane Commands">
             <commands group="xpcommand" />
         </chapter>
+        <markdown file="experimental-commands.md" />
         <markdown file="special-considerations.md" />
         <chapter title="Appendix">
             <markdown file="../LICENSE.md" />

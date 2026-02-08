@@ -23,9 +23,8 @@ The protocol is not in a stable state yet. Please refer to the [issues list](htt
 
 - the basic protocol syntax/encoding is finished
   - however, some special characters conflict with commonly used command syntax and prompt for a more general syntax/encoding rule
-- some essential commands still need to be added (version/feature discovery without need of large protocol revisions)
-- some command options are under review and may be reworked or removed
-- some additional commands are planned to be added
+- some essential commands are still under review (`SRLC` and `SRFS`)
+- some essential command options are under review and may still be reworked or removed
 
 ## Contributing (e.g. requesting features)
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="SRLC" title="List Server Commands" group="server"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>S</m>e<m>r</m>ver <m>L</m>ist <m>C</m>ommands</mnemonic>
+    <description>
+        Queries information about commands implemented by the XPRC server.
+
+        Each message sent by the server describes one command. Although recommended to provide a complete listing,
+        servers may not describe all commands they implement (in particular, some experimental commands intended only
+        for internal use may be omitted). Apart from the first message being required to describe `SRLC`, all other
+        commands are listed in no specific order. Commands must only be listed at most once per request (no repetition).
+
+        Commands starting with `X` are server-specific and should not be used unless their meaning has been confirmed,
+        see the section on "experimental commands" for details.
+
+        `SRFS` should not be used simultaneously as the result of `SRLC` may be inconsistent/outdated at the time it is
+        being received. Applications are recommended to check (and if necessary reconfigure) commands/features once
+        when initiating connections.
+
+        Clients are advised to only interpret the response if they support the indicated `SRLC` version and its active
+        feature flags.
+
+        See the section on "feature versioning" for details.
+
+        All command descriptions are formatted as (delimited by colon):
+
+        1. command name
+        2. currently active command version as unsigned integer
+           * initially, latest supported version must be active (may be switched via `SRFS`, if supported)
+           * `0` if version is unavailable (e.g. on unversioned experimental commands)
+        3. list of command feature flags, separated by comma; each feature flag is formatted as: (may be omitted if empty)
+           1. feature status
+              * `*` enabled by default (can be disabled)
+              * `?` disabled by default (can be enabled)
+              * `+` enabled as requested (can be disabled again)
+              * `-` disabled as requested (can be enabled again)
+              * `/` if unavailable (cannot be enabled)
+              * omitted if always enabled (cannot be disabled)
+           2. feature flag name
+              * one or more basic alpha-numeric characters incl. `-`, case sensitive (regular expression: `[a-zA-Z0-9\-]+`)
+              * `x-` should be used as a prefix to server-specific flags
+    </description>
+    <responses>
+        <response>
+            status, always `ACK`
+        </response>
+        <response>
+            First message always describes `SRLC` command (see above for details).
+        </response>
+        <response>
+            One message per described command (see above for details).
+        </response>
+    </responses>
+    <examples>
+        <example>
+            <client>AAAA SRLC</client>
+            <server>+ACK AAAA 153</server>
+            <server>+AAAA 153 SRLC:1</server>
+            <server>+AAAA 153 XRND:3:/seed,?secure<remark>fictional command, also see `SRFS` examples</remark></server>
+            <server>+AAAA 153 XCLS:0</server>
+            <server>+AAAA 153 DRLS:1:unspecific</server>
+            <later/>
+            <server>-AAAA 153 DRQV:1</server>
+        </example>
+    </examples>
+</command>

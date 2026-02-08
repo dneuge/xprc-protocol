@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command name="SRFS" title="Select Server Features" group="server"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../command.xsd">
+    <mnemonic><m>S</m>e<m>r</m>ver <m>F</m>eature <m>S</m>elect</mnemonic>
+    <description>
+        Reconfigures a single command by changing feature flags and/or switching command versions.
+
+        See the section on "feature versioning" for details.
+
+        Servers may not allow any changes to be made. The command should still be implemented as a placeholder always
+        indicating an error (`ERR`) status in that case.
+
+        Servers should never punish clients for errors caused by legit `SRFS` requests.
+
+        Changing versions may reset feature flags to the command version's default.
+
+        Clients are recommended to check `SRLC` before using this command and verify actual features by requesting
+        `SRLC` again after all `SRFS` requests have been completed.
+
+        `SRLC` and `SRFS` should not be used simultaneously to avoid inconsistent/outdated information but multiple
+        `SRFS` commands may be issued in parallel.
+    </description>
+    <parameters>
+        <parameter>command name</parameter>
+        <parameter>requested command version (using currently active version must not reset feature flags)</parameter>
+        <subparameters multiplicity="*" delimiter="," condition="can be omitted if no feature flags should be changed">
+            <parameter>
+                1. requested state of feature flag:
+                   * `+` to enable the feature flag
+                   * `-` to disable the feature flag
+                2. name of feature flag to change
+            </parameter>
+        </subparameters>
+    </parameters>
+    <responses>
+        <response>
+            status
+
+            * if requested command version and changes to feature flags are effective from now on: `ACK`
+            * if any requested change is not supported/possible: `ERR`
+        </response>
+    </responses>
+    <examples>
+        <example>
+            <client>AAAA SRFS XRND;3;+secure<remark>see `SRLC` example</remark></client>
+            <server>-ACK AAAA 654</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;3;-secure</client>
+            <server>-ACK AAAA 694</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;2</client>
+            <server>-ACK AAAA 712</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;1</client>
+            <server>-ERR AAAA 764 command version not supported: 1</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;3;+iter</client>
+            <server>-ERR AAAA 794 unknown feature flag: "iter"</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;3;+seed</client>
+            <server>-ERR AAAA 811 "seed" feature is unavailable on this server</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;3;+secure,-seed</client>
+            <server>-ACK AAAA 832</server>
+        </example>
+        <example>
+            <client>AAAA SRFS XRND;3;+secure</client>
+            <server>+ACK AAAA 867<remark>note that channel stays open; reconfiguration could not be finished instantly</remark></server>
+            <server>-ERR AAAA 982<remark>the requested change actually fails after a short time</remark></server>
+        </example>
+    </examples>
+    <notes>
+        <note>
+            Do not mistake channel acknowledgement for a success indicator: As with all other commands, `SRFS` has only
+            finished successfully once the channel was closed without any error indication.
+        </note>
+    </notes>
+</command>

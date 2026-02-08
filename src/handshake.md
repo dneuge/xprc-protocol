@@ -18,7 +18,7 @@ The server will then either, in case of
 
 The server system timestamp provided during a successful handshake should be referenced to the client's local clock and stored if necessary, as it is used for time reference in later communication. Full date and time will be provided but the exact format may vary (e.g. with or without milliseconds, `Z` or `+00:00` for UTC, possibly indicating a different time offset like `+01:00`). Neither server nor client clocks are required to be synchronized, so time reference may drift during longer sessions.
 
-The version number used during handshake only indicates the basic protocol revision. Available commands, their protocol revisions and feature subsets can be queried after login; see Capabilities below.
+The version number used during handshake only indicates the basic protocol revision. Available commands, their protocol revisions and feature subsets can be queried after login; see the section on Feature Versioning.
 
 Servers may choose to penalize clients failing the handshake for any reason, e.g. by (temporarily) banning/ignoring them if retried too quickly.
 
