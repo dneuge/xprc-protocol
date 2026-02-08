@@ -2,7 +2,7 @@
 
 Messages in both directions are terminated by line end.
 
-All requests are identified by prefixing with a case-sensitive 4 character basic alpha-numeric channel ID chosen by the client at time of request (regular expression: `[a-zA-Z0-9]{4}`). The channel ID is followed by a space character, then the requested command. Command options are attached semicolon-separated to the command itself while command parameters are provided after a space character.
+All requests start with a channel ID chosen by the client at time of request, followed by the command to be requested and parameters. Channel IDs are restricted to basic alpha-numeric characters and must always be 4 characters long (regular expression: `[a-zA-Z0-9]{4}`). Command names always use 4 upper-case basic alpha-numeric characters (`[A-Z0-9]{4}`). Channel ID, command and parameters are separated by single space characters each. Command names may be followed by one or more command options, separated from each other as well as the command name by semicolons. Multiple parameters are also separated by semicolon.
 
 Server messages related to a channel ID indicate by prefix if the channel stays open (`+`) or is being terminated/closed with this message (`-`). Messages unrelated to a channel are prefixed `*`.
 
