@@ -32,10 +32,10 @@ Please refer to the dedicated [contribution guidelines](CONTRIBUTING.md).
 
 Documentation source code is mostly kept inside the [`src`](src) directory. The document structure is controlled through [`document.xml`](src/document.xml) (complemented by a [schema](src/document.xsd)) whereas the individual parts are provided in two ways:
 
-- [commands](src/commands) are described in XML (according to the [command schema](src/command.xsd)) to ensure uniform templating
+- [commands](src/commands) are described in XML (according to the [command schema](src/command.xsd)) to ensure uniform templating, text blocks generally use Markdown formatting
 - other sections are written in Markdown (`.md`) format
 
-Tooling is then used to compile HTML and PDF (via LaTeX) files from those sources.
+Tooling will be provided shortly to compile HTML and possibly PDF (via LaTeX) files from those sources.
 
 ## History
 
