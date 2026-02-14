@@ -235,8 +235,8 @@
 
     <xs:complexType name="Markdown">
         <!-- TODO: is language injection for Intellij possible to be defined by XMLSchema? -->
-        <xs:complexContent>
+        <xs:simpleContent>
             <xs:extension base="xs:string" />
-        </xs:complexContent>
+        </xs:simpleContent>
     </xs:complexType>
 </xs:schema>
