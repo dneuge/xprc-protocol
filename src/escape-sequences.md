@@ -9,6 +9,6 @@ Some information, especially DataRef names, may collide with field separators or
 
 > [!warning]
 > Escape sequences are currently under review and their handling may change in the near future. See
-> https://codeberg.org/dneuge/xprc-protocol/issues/3 for details. Current recommendation is to avoid sending special
+> <https://codeberg.org/dneuge/xprc-protocol/issues/3> for details. Current recommendation is to avoid sending special
 > characters to the server, if possible, and log a warning if being sent or received to relate any errors which
 > may arise from subsequent misinterpretation.

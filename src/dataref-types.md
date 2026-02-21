@@ -14,7 +14,7 @@ Value encodings are human-readable, following the basic premise of text mode bei
 
 > [!warning]
 > More details on floating-point encoding, in particular encoding of special values (NaN and infinities) still has to be
-> specified; see https://codeberg.org/dneuge/xprc-protocol/issues/9 for details.
+> specified; see <https://codeberg.org/dneuge/xprc-protocol/issues/9> for details.
 
 Note that X-Plane's plugin API (XPLM) also has an "unknown" type (a placeholder for any type unsupported by current
 API) which is omitted from XPRC as it has no relevant use outside X-Plane internals.
