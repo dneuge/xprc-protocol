@@ -19,7 +19,7 @@
         <chapter title="X-Plane Commands">
             <commands group="xpcommand" />
         </chapter>
-        <markdown file="experimental-commands.md" />
+        <markdown file="extending-protocol.md" />
         <markdown file="special-considerations.md" />
         <chapter title="Appendix">
             <markdown file="../LICENSE.md" />
