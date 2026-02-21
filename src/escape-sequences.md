@@ -1,6 +1,6 @@
 ### Escape Sequences
 
-Some information, especially DataRef names, may collide with field separators or other syntax elements such as comma, semicolon, colon or brackets. To avoid misinterpretation, all “free-form” fields, even if not explicitly documented, should be encoded through a basic backslash-based escape sequence:
+Some information, especially DataRef names, may collide with field separators or other syntax elements such as comma, semicolon, colon or brackets. To avoid misinterpretation, all "free-form" fields, even if not explicitly documented, should be encoded through a basic backslash-based escape sequence:
 
 * The escape character is a backslash: `\`
 * An actual backslash `\` in a data field will be encoded as: `\\`
