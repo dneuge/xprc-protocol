@@ -10,14 +10,16 @@
         <markdown file="escape-sequences.md" />
         <markdown file="dataref-types.md" />
         <markdown file="feature-versioning.md" />
-        <chapter title="Server"><!-- TODO: add commands to get updated server timestamp etc.? -->
-            <commands group="server" />
-        </chapter>
-        <chapter title="DataRefs">
-            <commands group="dataref" />
-        </chapter>
-        <chapter title="X-Plane Commands">
-            <commands group="xpcommand" />
+        <chapter title="Commands">
+            <chapter title="Server"><!-- TODO: add commands to get updated server timestamp etc.? -->
+                <commands group="server" />
+            </chapter>
+            <chapter title="DataRefs">
+                <commands group="dataref" />
+            </chapter>
+            <chapter title="X-Plane Commands">
+                <commands group="xpcommand" />
+            </chapter>
         </chapter>
         <markdown file="extending-protocol.md" />
         <markdown file="special-considerations.md" />
