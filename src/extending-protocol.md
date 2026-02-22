@@ -1,6 +1,6 @@
-## Extending the Protocol
+# Extending the Protocol
 
-### Experimental Commands (implementation-specific, not standardized)
+## Experimental Commands (implementation-specific, not standardized)
 
 Server implementations may choose to offer experimental XPRC commands, which are not (yet) specified in the
 protocol standard.
@@ -19,7 +19,7 @@ clients/applications, it may be advisable to check that string against a list of
 Unknown or unidentifiable/uncertain commands should never be used automatically; applications may want to ask users
 for confirmation before doing so.
 
-### Experimental Feature Flags (implementation-specific, not standardized)
+## Experimental Feature Flags (implementation-specific, not standardized)
 
 Standardized commands may be altered by experimental feature flags which must be disabled by default (default behaviour,
 unless requested to be altered, must always follow official specification).
