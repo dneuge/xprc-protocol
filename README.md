@@ -13,7 +13,7 @@ this project has a strict "no AI" policy [affecting all contributions](CONTRIBUT
 
 Related projects:
 
-- [reference server implementation in C](https://github.com/dneuge/xprc-server-plugin-c) (X-Plane plugin, available on
+- [reference server implementation in C](https://codeberg.org/dneuge/xprc-server-plugin-c) (X-Plane plugin, available on
   [Codeberg](https://codeberg.org/dneuge/xprc-server-plugin-c) and [GitHub](https://github.com/dneuge/xprc-server-plugin-c))
 - a [Java client library](https://codeberg.org/dneuge/xprc-client-java) (available on [Codeberg](https://codeberg.org/dneuge/xprc-client-java) and [GitHub](https://github.com/dneuge/xprc-client-java))
 
