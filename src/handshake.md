@@ -22,13 +22,34 @@ The version number used during handshake only indicates the basic protocol revis
 
 Servers may choose to penalize clients failing the handshake for any reason, e.g. by (temporarily) banning/ignoring them if retried too quickly.
 
-Example:
+Examples:
 
-| Sender | Content/Action                                                                                                                                                                                                                                                                     |
-|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Server | `XPRC;version,password`                                                                                                                                                                                                                                                            |
-| Client | `v1`                                                                                                                                                                                                                                                                               |
-| Client | `8fjdksjfsnjdfsh`                                                                                                                                                                                                                                                                  |
-| Server | (Server delays connection for a random amount of time between 0.5 .. 2 seconds)                                                                                                                                                                                                    |
-| Server | either: `v1;OK;2022-02-28T19:35:12.543+01:00`<br /><br /> or: `v2;ERR:Error description text` <br /> (Login succeeded but server closes connection due to another error such as unsupported protocol versions) <br /> <br /> or: (Server closes connection if password is invalid) |
-  
+
+
+| Sender | Content                                                                                                  |
+|--------|----------------------------------------------------------------------------------------------------------|
+| Server | `XPRC;version,password`                                                                                  |
+| Client | `v1`                                                                                                     |
+| Client | `8fjdksjfsnjdfsh`                                                                                        |
+|        | *(server delays connection for a random amount of time)*                                                 |
+| Server | `v1;OK;2022-02-28T19:35:12.543+01:00` *(server accepted connection, confirming base protocol version 1)* |
+|        | *(session has been started, server is waiting for commands)*                                             |
+
+| Sender | Content                                                                                                         |
+|--------|-----------------------------------------------------------------------------------------------------------------|
+| Server | `XPRC;version,password`                                                                                         |
+| Client | `v1`                                                                                                            |
+| Client | `8fjdksjfsnjdfsh`                                                                                               |
+|        | *(server delays connection for a random amount of time)*                                                        |
+| Server | `v2;ERR:Error description text` *(login succeeded but an error occurred; base protocol version 2 is supported)* |
+|        | *(server closes connection because handshake failed)*                                                           |
+
+| Sender | Content                                                   |
+|--------|-----------------------------------------------------------|
+| Server | `XPRC;version,password`                                   |
+| Client | `v1`                                                      |
+| Client | `skd9234n`                                                |
+|        | *(server delays connection for a random amount of time)*  |
+|        | *(server closes connection because password was invalid)* |
+
+
