@@ -38,7 +38,6 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="response" type="Markdown" maxOccurs="unbounded" />
-                        <xs:element name="remark" type="Markdown" minOccurs="0" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

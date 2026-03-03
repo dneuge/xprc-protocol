@@ -34,10 +34,10 @@
             1. comma-separated list of supported data types (see DataRef Types)
             2. `ro` if indicated as read-only, `rw` if indicated as writable
             3. name of DataRef
+
+            > [!note]
+            > If information about specific datarefs has been requested but some (or all) of them are not found within X-Plane, the returned list may be incomplete. A completely empty result (e.g. `+ACK` followed by `-ACK`) is also possible in that case.
         </response>
-        <remark>
-            If information about specific datarefs has been requested but some (or all) of them are not found within X-Plane, the returned list may be incomplete. A completely empty result (e.g. `+ACK` followed by `-ACK`) is also possible in that case.
-        </remark>
     </responses>
     <examples>
         <example>
