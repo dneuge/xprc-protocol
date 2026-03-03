@@ -34,7 +34,9 @@
             <description>
                 defines how float/double values are converted to an integer if mixed types are in use and a floating point number is being set
 
+                <!-- TODO: step setting is not specified yet
                 Mutually exclusive to `step` settings.
+                -->
             </description>
             <constants>
                 <constant name="round">standard rounding (floor &lt; .5, ceil ≥ .5)</constant>
