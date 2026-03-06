@@ -1,0 +1,8 @@
+Source: https://github.com/JetBrains/JetBrainsMono/releases/tag/v2.304
+License: SIL OFL 1.1 (see OFL.txt)
+
+downloaded JetBrainsMono-2.304.zip
+21 Feb 2026 18:16 UTC
+
+26c7c3aa0435b8d475fa5df0df3b8132  JetBrainsMono-2.304.zip
+
