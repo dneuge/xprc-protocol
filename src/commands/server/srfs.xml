@@ -26,6 +26,8 @@
         <parameter>requested command version (using currently active version must not reset feature flags)</parameter>
         <subparameters multiplicity="*" delimiter="," condition="can be omitted if no feature flags should be changed">
             <parameter>
+                change of flag, consisting of: (concatenated without space)
+
                 1. requested state of feature flag:
                    * `+` to enable the feature flag
                    * `-` to disable the feature flag
