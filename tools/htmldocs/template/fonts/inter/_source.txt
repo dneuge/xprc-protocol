@@ -1,0 +1,9 @@
+Website: https://rsms.me/inter/
+Source: https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip
+License: SIL OFL 1.1 (see LICENSE.txt)
+
+downloaded Inter-4.1.zip
+14 Feb 2026 15:51 UTC
+
+d00ce561d197b9a2fb82b2fa615075b7  Inter-4.1.zip
+
