@@ -1,0 +1,8 @@
+Source: https://github.com/adobe-fonts/source-sans/releases/tag/3.052R
+License: SIL OFL 1.1 (see LICENSE.md)
+
+downloaded WOFF2-source-sans-3.052R.zip
+14 Feb 2026 15:26 UTC
+
+ea7cf74d5852072f84b6deb310d5a846  WOFF2-source-sans-3.052R.zip
+
