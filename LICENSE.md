@@ -53,7 +53,7 @@ Examples:
     describe the relevant functionality in your own words to avoid any legal uncertainty
 - *automatically* generating/deriving software or other resources based on this repository: such generation will create
   an actual derivative product, requiring you to follow all license terms (exemptions do not apply)
-  > [!caution]
+  > [!warning]
   > Using "Artificial Intelligence" for code generation is a prime example for this case. It is generally
   > recommended to not use this project together with "AI" (see also the clarification on AI usage in the
   > [readme](README.md) file). AI users are recommended to seek international legal advice to avoid license violations.

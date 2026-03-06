@@ -12,7 +12,7 @@ Value encodings are human-readable, following the basic premise of text mode bei
 * binary data is encoded to upper-case hex strings, always using a multiple of 2 characters (one for each nibble)
   * bytes are directly concatenated without any delimiters in-between
 
-> [!warning]
+> [!caution]
 > More details on floating-point encoding, in particular encoding of special values (NaN and infinities) still has to be
 > specified; see <https://codeberg.org/dneuge/xprc-protocol/issues/9> for details.
 
