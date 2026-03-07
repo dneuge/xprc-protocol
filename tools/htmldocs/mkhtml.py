@@ -32,7 +32,7 @@ if (args.repo_refhash is not None or args.repo_refname is not None) != (args.rep
     sys.exit(1)
 
 repo_version : str|None = ''
-re_valid_refhash = re.compile(r'^[0-9a-f]{32}$', re.IGNORECASE)
+re_valid_refhash = re.compile(r'^[0-9a-f]{8,}$', re.IGNORECASE)
 if args.repo_refhash is not None:
     if re_valid_refhash.match(args.repo_refhash) is None:
         raise ValueError(f'Invalid commit hash format: "{args.repo_refhash}"')
