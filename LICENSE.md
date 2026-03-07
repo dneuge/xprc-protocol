@@ -16,7 +16,7 @@ software and it begs the question how/if a protocol specification (primarily doc
 There are some wide-spread variations of the MIT license mentioning "Materials" instead of "Software", however still
 referring to those "Materials" as supplements to "Software", hence also not exactly applying to this project. Common
 alternatives also did not seem to fit the purpose of specification documents used for software development, so the
-project was insteaad released with this clarification put in front of original MIT and a "Materials"-specific
+project was instead released with this clarification put in front of original MIT and a "Materials"-specific
 modification to the MIT license.
 
 If unsure or in legal conflict:
@@ -39,7 +39,7 @@ The protocol specification is provided as a common reference document to enable 
 clients, to be interoperable with each other.
 
 Implementations following the specification are recommended to link to this project for reference but are not required
-to treat the specification as a dependency, copy, modification or derivate in terms of the licenses below unless actual
+to treat the specification as a dependency, copy, modification or derivative in terms of the licenses below unless actual
 files or significant portions of verbatim copies from this project are actually being included.
 
 Examples:
