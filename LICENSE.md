@@ -62,7 +62,7 @@ Examples:
 
 ## Variation of the MIT License applying primarily to documentation/"Materials"
 
-**Applicable to the specification in this repository and document releases based on this repository**
+**Applicable to the specification in this repository and documentation contents based on it as well as other original work (such as templates) which may not qualify as "software". Compiled documentation may be subject to additional licenses introduced by dependencies included with documentation templates (e.g. fonts); this license does not extend to, replace nor alter any of those additional licenses.**
 
 Copyright (c) 2022-2026 Daniel Neugebauer
 
@@ -86,7 +86,7 @@ THE MATERIALS.
 
 ## Original MIT License (MIT)
 
-**Applicable to software/tooling contained in this repository**
+**Applicable to all original software/tooling contained in this repository unless marked otherwise.**
 
 Copyright (c) 2022-2026 Daniel Neugebauer
 

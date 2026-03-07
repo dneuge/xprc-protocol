@@ -1,0 +1,906 @@
+@import "font-source-sans-3.less";
+@import "font-inter.less";
+@import "font-jetbrains-mono.less";
+
+@minWidth: 800px;
+@maxWidth: 1500px;
+@headerHeight: 60px;
+@sidebarWidth: 300px;
+
+@baseBackground: #6c91a8;
+@contentBackground: lighten(@baseBackground, 20%);
+@pageBackground: darken(@baseBackground, 20%);
+@frameBackground: @baseBackground;
+@boxBackground: lighten(@contentBackground, 10%);
+@boxBorderColor: darken(@contentBackground, 20%);
+@boxHeaderTextColor: whitesmoke;
+@menuHoverColor: whitesmoke;
+
+.codeBgColor(@surroundingBgColor) {
+    /* keep same definition as @boxBackground */
+    background-color: lighten(@surroundingBgColor, 10%);
+}
+
+html, body {
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    .fontSourceSans();
+
+    background-color: @pageBackground;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    .fontInterMedium();
+
+    /* margin should be primarily controlled by the content that follows/preceeds */
+    margin-bottom: 0.25em;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+/*
+p {
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+*/
+
+pre {
+    background-color: @boxBackground;
+    margin: 1em;
+}
+
+code {
+    .fontJetBrainsMono();
+
+    background-color: @boxBackground;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+code.line {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    vertical-align: text-top; /* otherwise pre>code.line will have a 1px line above first element */
+
+    &:nth-child(2n+1) {
+        background-color: darken(@boxBackground, 5%);
+    }
+}
+
+pre.no-alternate code.line {
+    &, &:nth-child(2n+1) {
+        background-color: inherit;
+    }
+}
+
+pre.code {
+    /* we cannot use "code" inside if we have to access ::first-line */
+    .fontJetBrainsMono();
+}
+
+pre.wrap {
+    white-space: pre-wrap;
+}
+
+#outer {
+    max-width: @maxWidth;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: @contentBackground;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+header {
+    display: block;
+
+    position: fixed;
+    width: 100%;
+    max-width: @maxWidth;
+    height: @headerHeight;
+
+    background-color: @frameBackground;
+    vertical-align: middle;
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+header nav {
+    //position: absolute;
+    float: right;
+    //width: 100%;
+    max-width: @maxWidth;
+    height: @headerHeight;
+
+    text-align: right;
+
+    box-sizing: border-box;
+    padding-top: 18px;
+    padding-right: 1em;
+}
+
+header .title {
+    float: left;
+    margin-left: 1em;
+
+    cursor: default;
+
+    .title-inner {
+        //position: absolute; /* if not absolute, preceeding nav element covers */
+
+        display: inline-block;
+        line-height: @headerHeight;
+        vertical-align: middle;
+
+        //.fontSourceSansSemiBold();
+        .fontInterMedium();
+        font-size: 40px;
+
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+}
+
+header .info {
+    display: inline-block;
+    //position: absolute;
+    float: left;
+    margin-top: 12px;
+    margin-left: 1em;
+    cursor: default;
+
+    .development {
+        color: #7f0000;
+        //text-shadow: 0 0 3px rgba(0,0,0,0.1);
+        text-decoration: underline;
+        cursor: help;
+
+        .fontSourceSansSemiBold();
+    }
+
+    &,
+    .development {
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+
+aside {
+    display: block;
+
+    position: fixed;
+    margin-top: @headerHeight;
+    width: @sidebarWidth;
+    height: calc(100% - @headerHeight);
+    overflow: auto;
+    background-color: @frameBackground;
+
+    padding-left: 1em;
+    padding-right: 0.25em;
+    box-sizing: border-box;
+
+    h1, h2 {
+        .fontSourceSans();
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    & > :first-child {
+        margin-top: 8px;
+    }
+}
+
+aside > ul {
+    //padding-left: 0.5em;
+    padding-left: 0;
+    margin-top: 0.5em;
+
+    ul {
+        padding-left: 0.5em;
+    }
+
+    li {
+        list-style: none;
+
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: -0.25px;
+    }
+
+    li ul {
+        padding-left: 0.5em;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 150ms;
+
+        text-overflow: ellipsis;
+
+        width: 100%;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &:hover, &.active {
+            color: @menuHoverColor;
+        }
+    }
+
+    /*
+    li {
+        a:has(+ul)::before {
+            content: '>';
+            display: inline;
+        }
+
+        > ul {
+            display: none;
+        }
+    }
+
+    li:has(.active) {
+        & > a:has(+ul)::before {
+            content: 'v';
+            display: inline;
+        }
+
+        > ul {
+            display: block;
+        }
+    }
+     */
+}
+
+.button(@buttonBgColor) {
+    display: inline-block;
+
+    a {
+        display: inline-block;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        .fontSourceSansSemiBold();
+
+        background: @buttonBgColor;
+        background: linear-gradient(lighten(@buttonBgColor, 10%) 0%, @buttonBgColor 10%, @buttonBgColor 80%, darken(@buttonBgColor, 10%) 100%);
+        border-color: darken(@buttonBgColor, 10%);
+
+        text-decoration: none;
+        color: white;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+        &:hover {
+            background: linear-gradient(45deg, lighten(@buttonBgColor, 10%) 0%, @buttonBgColor 10%, @buttonBgColor 80%, darken(@buttonBgColor, 10%) 100%);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 5px 5px 5px rgba(0, 0, 0, 0.25);
+        }
+    }
+}
+
+.button {
+    .button(#0c5d9d);
+}
+
+main {
+    border: 1px solid transparent;
+}
+
+main #mid {
+    margin-top: calc(@headerHeight - 1px);
+    margin-left: calc(@sidebarWidth - 1px);
+}
+
+main #inner {
+    margin: 10px;
+    max-width: calc(@maxWidth - @sidebarWidth - 2px);
+    overflow: auto;
+
+    & > :first-child {
+        margin-top: 2px;
+    }
+}
+
+main a {
+    &, &:hover, &:visited {
+        color: @pageBackground;
+        font-weight: bold;
+    }
+
+    &.autolink {
+        white-space: nowrap;
+    }
+}
+
+main ul,
+main ol {
+    &, li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
+    li {
+        > :first-child {
+            margin-top: 0;
+        }
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+main table {
+    width: 100%;
+    border-collapse: collapse;
+
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    th {
+        vertical-align: bottom;
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    td > :first-child {
+        margin-top: 0;
+    }
+
+    td > :last-child {
+        margin-bottom: 0;
+    }
+
+    th, td {
+        padding: 0.2em;
+
+        border: 1px solid black;
+
+        &:first-child {
+            border-left: 0;
+        }
+
+        &:last-child {
+            border-right: 0;
+        }
+    }
+
+    tr:first-child th,
+    tr:first-child td {
+        border-top: 0;
+    }
+
+    tr:last-child th,
+    tr:last-child td {
+        border-bottom: 0;
+    }
+
+    thead tr:last-child th {
+        border-bottom: 2px solid black;
+    }
+}
+
+main .command {
+    margin-top: 1em;
+
+    & + .command {
+        margin-top: 2em;
+    }
+
+    h3, h4, h5, h6, .headline {
+        display: block;
+
+        .fontSourceSansSemiBold();
+        font-size: 16px;
+
+        margin-top: 1.0em;
+        margin-bottom: 0.25em;
+
+        .headline-annotation {
+            .fontSourceSans();
+            font-weight: 400;
+        }
+    }
+
+    .command-name {
+        float: left;
+
+        @fontSize: 50px;
+
+        .fontJetBrainsMono();
+        font-size: @fontSize;
+        line-height: @fontSize;
+    }
+
+    .command-hrname {
+        float: left;
+        padding-left: 1em;
+    }
+
+    .command-title {
+        font-size: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
+        /*padding-top: 2px;*/
+    }
+
+    .command-mnemonic {
+        .command-mnemonic-mark {
+            text-decoration: underline;
+        }
+    }
+
+    .command-version {
+        float: right;
+        font-size: 14px;
+    }
+
+    table.command-options,
+    table.command-constants,
+    table.command-suffixes {
+        margin-top: 0;
+        margin-bottom: 1em;
+
+        > tbody > tr {
+            > th, > td {
+                border: 0;
+                vertical-align: text-top;
+            }
+
+            > th {
+                .fontJetBrainsMono();
+                min-width: 16ex;
+                font-weight: normal;
+                padding-left: 0;
+            }
+
+            > td {
+                padding-top: 0;
+                width: 100%;
+            }
+        }
+
+        span.headline {
+            margin-top: 0.5em;
+        }
+    }
+
+    table.command-constants,
+    table.command-suffixes {
+        > tbody > tr > td {
+            padding-bottom: 0;
+        }
+    }
+
+    span.command-option-variable {
+        /*font-style: italic;*/
+    }
+
+    table.command-options {
+        > tbody > tr > th > code > span.command-option-variable {
+            font-style: italic;
+            font-weight: 800;
+        }
+    }
+
+    table.command-options td .headline {
+        .fontSourceSansSemiBold();
+
+        span.command-option-variable {
+            .fontJetBrainsMono();
+            font-style: italic;
+            font-weight: 800;
+        }
+    }
+
+    ol.command-parameters,
+    ol.command-responses,
+    ul.command-notes {
+        &, ol, ul {
+            margin-top: 0;
+            margin-bottom: 0;
+
+            > li {
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+
+                p:has(+ ul),
+                p:has(+ ol) {
+                    margin-bottom: 0.5em;
+                }
+            }
+        }
+    }
+
+    ol.command-parameters,
+    ol.command-responses {
+        &, ol {
+            &:not(:has(>li:nth-child(2))) {
+                /* singular enumeration list: show as bullet point instead */
+
+                > li {
+                    list-style-type: disc;
+                }
+            }
+        }
+    }
+
+    .command-options,
+    .command-parameters,
+    .command-responses,
+    .command-notes {
+        .special-block {
+            margin-left: 0;
+        }
+    }
+
+    .command-parameters {
+        .command-parameter-annotation {
+            float: right;
+
+            background-color: @boxBackground;
+            border: 1px solid black;
+
+            margin-left: 1em;
+            margin-bottom: 0.5em;
+
+            margin-top: -5px;
+
+            table {
+                margin: 0;
+                min-width: 15em;
+                max-width: 25em;
+
+                th {
+                    width: 1em;
+                    white-space: nowrap;
+                }
+
+                th, td {
+                    border: 0;
+                    vertical-align: text-top;
+                }
+            }
+
+            + p {
+                margin-top: 0;
+            }
+        }
+
+        li.command-parameter {
+            clear: both;
+        }
+    }
+}
+
+main ul.conversation {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    @labelWidth: 4em;
+    @labelGap: 0.5em;
+    @labelShift: @labelWidth + @labelGap;
+
+    li {
+        display: block;
+        margin-top: 0.25em;
+        margin-bottom: 0.25em;
+        padding-left: @labelShift;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .conversation-actor {
+            .fontSourceSansSemiBold();
+
+            position: absolute;
+            margin-left: -@labelShift;
+            display: block;
+            width: @labelWidth;
+            background-color: magenta;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+            box-sizing: border-box;
+            text-align: center;
+        }
+    }
+
+    li.conversation-client .conversation-actor {
+        background-color: average(blue, @boxBackground);
+    }
+
+    li.conversation-server .conversation-actor {
+        background-color: average(red, @boxBackground);
+    }
+
+    li.conversation-client {
+        font-weight: 800;
+    }
+
+    .conversation-remark {
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    li.conversation-client,
+    li.conversation-server {
+        @msgMinWidth: 50%;
+
+        & > code {
+            display: inline-block;
+            min-width: @msgMinWidth;
+            background-color: transparent;
+            padding: 0;
+            vertical-align: baseline;
+        }
+
+        .conversation-remark {
+            @remarkPadding: 2em;
+
+            display: inline-block;
+            padding-left: @remarkPadding;
+            vertical-align: top;
+
+            max-width: calc(@msgMinWidth - @remarkPadding - @labelGap);
+
+            text-align: left;
+
+            &:first-line {
+                text-align: left;
+            }
+
+            p {
+                /* paragraphs should not be used here but are generated by markdown renderer */
+                display: inline;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+.box {
+    @boxBorderWidth: 2px;
+    @boxHeaderIndent: 1em;
+
+    width: calc(100% - (2 * @boxBorderWidth));
+    border: @boxBorderWidth solid @boxBorderColor;
+    border-radius: 5px;
+    background-color: @boxBackground;
+
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    > .box-header {
+        background-color: @boxBorderColor;
+        /*border-radius: 3px;*/
+        cursor: pointer;
+        color: @boxHeaderTextColor;
+
+        padding-left: @boxHeaderIndent;
+    }
+
+    > .box-header::before {
+        position: absolute;
+        margin-top: -1px;
+        margin-left: -@boxHeaderIndent;
+    }
+
+    > .box-content {
+        padding: 0.5em;
+    }
+
+    &.box-collapsed > .box-header::before {
+        content: '\23F5'; /* triangle pointing right */
+    }
+
+    &.box-expanded > .box-header::before {
+        content: '\23F7'; /* triangle pointing down */
+    }
+
+    &.box-collapsed > .box-content {
+        display: none;
+    }
+}
+
+.special-block {
+    @iconSize: 40px;
+    @verticalPadding: 0.5em;
+
+    margin: 1em;
+
+    border-top: 0.2em solid magenta;
+    border-bottom: 0.2em solid magenta;
+    padding-top: @verticalPadding;
+    padding-bottom: @verticalPadding;
+    padding-left: calc(1em + @iconSize);
+    min-height: @iconSize;
+
+    background-repeat: no-repeat;
+    background-size: @iconSize @iconSize;
+    background-position-x: 0.4em;
+    background-position-y: @verticalPadding;
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.33);
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    .specialBlockColors(@sbBaseColor) {
+        @sbBgColor: hardlight(@sbBaseColor, @boxBackground);
+        border-color: @sbBaseColor;
+        background-color: @sbBgColor;
+
+        code {
+            .codeBgColor(@sbBgColor);
+        }
+    }
+
+    &.special-block-note {
+        .specialBlockColors(#5599ff);
+        background-image: data-uri('icon-note.svg');
+    }
+
+    &.special-block-warning {
+        /*
+        .specialBlockColors(#ffcc00);
+        .specialBlockColors(#d4aa00);
+         */
+        .specialBlockColors(#c8ab37);
+        background-image: data-uri('icon-warning.svg');
+    }
+
+    &.special-block-caution {
+        .specialBlockColors(#c83737);
+        background-image: data-uri('icon-caution.svg');
+    }
+}
+
+.document-info {
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+
+    margin-top: 2em;
+    margin-bottom: 0;
+
+    text-align: right;
+
+    code {
+        font-size: 10px;
+        background-color: transparent;
+    }
+}
+
+@media print {
+    html, body, #outer {
+        background-color: transparent;
+    }
+
+    #outer {
+        max-width: revert;
+        margin-left: revert;
+        margin-right: revert;
+        box-shadow: revert;
+    }
+
+    header,
+    aside {
+        display: none;
+    }
+
+    main,
+    main #mid,
+    main #inner {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: revert;
+        border: 0;
+    }
+
+    .special-block {
+        box-shadow: revert;
+
+        &.special-block-note,
+        &.special-block-warning,
+        &.special-block-caution {
+            background-color: transparent;
+        }
+    }
+
+    code {
+        background-color: transparent;
+    }
+
+    .box {
+        &, .box-header {
+            background-color: transparent;
+            border-color: black;
+        }
+
+        .box-header {
+            .fontSourceSansSemiBold();
+            color: black;
+        }
+
+        box-shadow: revert;
+    }
+
+    pre {
+        &, code, code.line:nth-child(2n+1) {
+            background-color: transparent;
+        }
+    }
+
+
+    ul.conversation {
+        li.conversation-server,
+        li.conversation-client {
+            div.conversation-actor {
+                background-color: transparent;
+                text-shadow: revert;
+                color: black;
+            }
+        }
+    }
+
+    .command {
+        break-after: page;
+    }
+
+    h2 {
+        break-before: page;
+    }
+}
+

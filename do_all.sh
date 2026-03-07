@@ -16,4 +16,7 @@ function die() {
 "${script_dir}/validate.sh" || die "Validation failed, aborting..."
 
 echo
+"${script_dir}/build.sh" $@ || die "Build failed, aborting..."
+
+echo
 echo "All steps completed successfully."

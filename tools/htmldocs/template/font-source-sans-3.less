@@ -1,0 +1,36 @@
+/* Source Sans 3: https://github.com/adobe-fonts/source-sans/blob/release/source-sans-3.css */
+
+.fontSourceSans() {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 16px;
+    font-feature-settings: revert; /* custom: reset setting inherited from Inter font on overrides */
+}
+
+.fontSourceSansSemiBold() {
+    .fontSourceSans();
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Source Sans 3';
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    src: data-uri('font/woff2;base64', 'fonts/source-sans/WOFF2-source-sans-3.052R/WOFF2/TTF/SourceSans3-Regular.ttf.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Sans 3';
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: normal;
+    src: data-uri('font/woff2;base64', 'fonts/source-sans/WOFF2-source-sans-3.052R/WOFF2/TTF/SourceSans3-It.ttf.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Source Sans 3';
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    src: data-uri('font/woff2;base64', 'fonts/source-sans/WOFF2-source-sans-3.052R/WOFF2/TTF/SourceSans3-Semibold.ttf.woff2') format('woff2');
+}

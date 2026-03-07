@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <!-- ###TEMPLATE_FILEMARK### -->
+    <!-- ###TEMPLATE_HEAD_TITLE_BEGIN### -->
+    <title>XPRC Protocol Revision 0.123 T1</title>
+    <!-- ###TEMPLATE_HEAD_TITLE_END### -->
+    <!-- ###TEMPLATE_INSERT style main.css### -->
+    <!-- ###TEMPLATE_INSERT script main.js### -->
+    <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+    <link rel="stylesheet" href="main.css"/>
+    <script type="application/javascript" src="main.js"></script>
+    <!-- ###TEMPLATE_REMOVE_END### -->
+</head>
+<body>
+<div id="outer">
+    <header>
+        <nav class="buttons">
+            <div class="button"><a href="https://codeberg.org/dneuge/xprc-protocol" target="_blank"><span>Visit Repository</span></a></div>
+        </nav>
+        <span class="title">
+            <span class="title-inner">
+                <!-- ###TEMPLATE_TITLE_BEGIN### -->
+                XPRC Protocol Revision 0.123 T1
+                <!-- ###TEMPLATE_TITLE_END### -->
+            </span>
+        </span>
+        <!-- ###SUBTEMPLATE_DEVELOPMENT_INFO_BEGIN### -->
+        <span class="info">
+            <span class="development"
+                  title="Development publications are preliminary and should only be used for discussion or preview. Use released/tagged versions for implementation reference instead, if available."
+            >Development</span> revision: <!-- ###TEMPLATE_BUILD_REF_BEGIN### -->92387cd (main)<!-- ###TEMPLATE_BUILD_REF_END### --><br/>
+            Revision date: <!-- ###TEMPLATE_BUILD_DATE_BEGIN###-->6 March 2026, built 23 December 2027<!-- ###TEMPLATE_BUILD_DATE_END###-->
+        </span>
+        <!-- ###SUBTEMPLATE_DEVELOPMENT_INFO_END### -->
+        <div class="clear"></div>
+    </header>
+    <aside>
+        <h1>
+            Specification Contents
+        </h1>
+        <ul id="document-menu">
+            <!-- ###TEMPLATE_DOCUMENT_MENU_BEGIN### -->
+            <li><a href="#intro">Introduction</a></li>
+            <li>
+                <a href="#ch-1">Chapter 1</a>
+                <ul>
+                    <li><a href="#ch-1-section-1">Section 1.1</a></li>
+                    <li><a href="#ch-1-section-2">Section 1.2</a></li>
+                    <li><a href="#ch-1-section-3">Section 1.3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#ch-2">Chapter 2</a>
+                <ul>
+                    <li>
+                        <a href="#ch-2-section-1">Section 2.1</a>
+                        <ul>
+                            <li>
+                                <a href="#ch-2-section-1-1">Subsection 2.1.1</a>
+                                <ul>
+                                    <li><a href="#ch-2-section-1-1-1">Subsection 2.1.1.1</a></li>
+                                    <li><a href="#ch-2-section-1-1-2">Subsection 2.1.1.2</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#ch-2-section-1-2">Subsection 2.1.2</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#ch-2-section-2">Section 2.2</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#ch-3">Chapter 3</a>
+                <ul>
+                    <li><a href="#ch-3-section-1">Section 3.1</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#ch-4">Chapter 4</a>
+            </li>
+            <!-- ###TEMPLATE_DOCUMENT_MENU_END### -->
+        </ul>
+
+        <h2>Additional Information</h2>
+        <ul>
+            <li><a href="#embedded-licenses">HTML-Embedded Licenses</a></li>
+        </ul>
+    </aside>
+    <main>
+        <div id="mid">
+            <div id="inner">
+                <!-- ###TEMPLATE_CONTENT_BEGIN### -->
+                <h1 id="intro">XPRC Spec</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ullamcorper lectus a tellus congue tempor. Aenean a aliquam quam. Aliquam
+                    egestas
+                    elit
+                    eu
+                    nulla lacinia, at ultrices magna pulvinar. Vestibulum mauris felis, blandit non felis a, egestas aliquet eros. Ut scelerisque malesuada
+                    felis,
+                    id
+                    semper
+                    eros faucibus quis. Curabitur blandit arcu facilisis, dignissim sapien vel, placerat erat. Sed et metus eu velit porttitor interdum. Cras a
+                    ipsum
+                    viverra, sagittis leo at, scelerisque ante. Curabitur malesuada mauris eros, vel fermentum ex faucibus et. Aliquam nec quam lorem. Etiam
+                    finibus
+                    urna ac
+                    tristique mattis. Aenean rutrum, lectus vel tempor pulvinar, augue nunc faucibus urna, vitae placerat elit justo ac massa. Duis at massa
+                    gravida,
+                    ornare
+                    eros et, iaculis massa. Etiam eget diam enim.
+                </p>
+                <p>
+                    Something else here.
+                </p>
+                <div class="special-block special-block-note"><p>This is a note. There may also be <code>code</code> inside.</p></div>
+                <div class="special-block special-block-warning"><p>This is a warning. There may also be <code>code</code> inside.</p></div>
+                <div class="special-block special-block-caution">
+                    <p>This is a caution advisory. There may also be <code>code</code> inside.</p>
+                    <p>With multiple paragraphs.</p>
+                </div>
+
+                <h2 id="ch-1">Chapter 1</h2>
+                <h3 id="ch-1-section-1">Section 1.1</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First column</th>
+                        <th>Second</th>
+                        <th>Third</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>something</td>
+                        <td>Whatever</td>
+                        <td>
+                            <p>
+                                Paragraph followed by:
+                            </p>
+                            <ol>
+                                <li>an order enumeration</li>
+                                <li>another paragraph below</li>
+                            </ol>
+                            <p>
+                                Final paragraph of this cell.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>even more</td>
+                        <td>More Stuff</td>
+                        <td>
+                            <p>
+                                Single paragraph.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>end in sight</td>
+                        <td>We continue once more.</td>
+                        <td>
+                            Something that's not wrapped in a paragraph.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3 id="ch-1-section-2">Section 1.2</h3>
+                <p>
+                    This is some <code>inline code</code> in a paragraph.
+                </p>
+
+                <pre><code>This is a block of code.
+
+Multiple lines
+pre-formatted.</code></pre>
+                <h3 id="ch-1-section-3">Section 1.3</h3>
+                <h2 id="ch-2">Chapter 2</h2>
+                <h3 id="ch-2-section-1">Section 2.1</h3>
+                <h4 id="ch-2-section-1-1">Subsection 2.1.1</h4>
+                <h5 id="ch-2-section-1-1-1">Subsection 2.1.1.1</h5>
+                <h5 id="ch-2-section-1-1-2">Subsection 2.1.1.2</h5>
+                <h4 id="ch-2-section-1-2">Subsection 2.1.2</h4>
+                <h3 id="ch-2-section-2">Section 2.2</h3>
+                <h2 id="ch-3">Chapter 3</h2>
+                <h3 id="ch-3-section-1">Section 3.1</h3>
+                <p>A conversation transcript follows:</p>
+                <div class="box">
+                    <div class="box-content">
+                        <ul class="conversation">
+                            <li class="conversation-client">
+                                <div class="conversation-actor">Client</div>
+                                <code>ABCD TEST;option=something Hello World</code>
+                                <div class="conversation-remark"><p>"Hello World" always is a good start</p></div>
+                            </li>
+                            <li class="conversation-server">
+                                <div class="conversation-actor">Server</div>
+                                <code>+ACK ABCD 123 Hello user</code>
+                            </li>
+                            <li class="conversation-server">
+                                <div class="conversation-actor">Server</div>
+                                <code>+ABCD 125 I can send more lines</code>
+                                <div class="conversation-remark"><p>The server can send more lines. Really!</p></div>
+                            </li>
+                            <li class="conversation-time-passes">&#8230;</li>
+                            <li class="conversation-server">
+                                <div class="conversation-actor">Server</div>
+                                <code>+ABCD 4200 Hello, are you still there? Terminate me if you can!</code>
+                                <div class="conversation-remark"><p>Oh no, the server wonders if we're still there! We are even asked to terminate the
+                                    command... Maybe we should do this? (after this overly long remark which is just there to check how an overflow will look
+                                    like)</p></div>
+                            </li>
+                            <li class="conversation-client">
+                                <div class="conversation-actor">Client</div>
+                                <code>ABCD TERM</code>
+                            </li>
+                            <li class="conversation-remark"><p>Client has requested termination, server will close the channel soon...</p></li>
+                            <li class="conversation-server">
+                                <div class="conversation-actor">Server</div>
+                                <code>-ACK ABCD 4205</code>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <p>This is after the transcript.</p>
+                <h2 id="ch-4">Chapter 4</h2>
+
+                <!-- ###SUBTEMPLATE_COMMAND_BEGIN### -->
+                <div class="command">
+                    <div class="command-name"><!-- ###TEMPLATE_COMMAND_NAME_BEGIN### -->DRCI<!-- ###TEMPLATE_COMMAND_NAME_END### --></div>
+                    <div class="command-hrname">
+                        <!-- ###TEMPLATE_COMMAND_TITLE_BEGIN### -->
+                        <h4 id="_command_drci" class="command-title">
+                            Claim DataRef Immediate
+                        </h4>
+                        <!-- ###TEMPLATE_COMMAND_TITLE_END### -->
+                        <div class="command-mnemonic">
+                            <!-- ###TEMPLATE_COMMAND_MNEMONIC_BEGIN### -->
+                            <span class="command-mnemonic-mark">D</span>ata<span class="command-mnemonic-mark">R</span>ef
+                            <span class="command-mnemonic-mark">C</span>laim <span class="command-mnemonic-mark">I</span>mmediate
+                            <!-- ###TEMPLATE_COMMAND_MNEMONIC_END### -->
+                        </div>
+                    </div>
+                    <div class="command-version">
+                        Command Version 1
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="command-description">
+                        <!-- ###TEMPLATE_COMMAND_DESCRIPTION_BEGIN### -->
+                        <p>
+                            Attempts to create the specified dataref within X-Plane. Claimed datarefs need to be released through
+                            channel termination before redefinition; definitions cannot be shared between channels or sessions.
+                        </p>
+
+                        <p>
+                            If the dataref is manipulated, accepted (optionally immediately adjusted) input can be retrieved
+                            from the dataref again. The updated value is sent to the channel asynchronously.
+                        </p>
+
+                        <p>
+                            "Immediate" means two things:
+                        </p>
+                        <ul>
+                            <li>value changes are direct, not adjusted over time (other than input to a PID controller)</li>
+                            <li>value changes are not held back for external confirmation</li>
+                        </ul>
+
+                        <p>
+                            The dataref can be accessed from X-Plane as well as via all other XPRC commands (e.g. <code>DRQV</code> and <code>DRMU</code>,
+                            it is also seen by <code>DRLS</code>).
+                        </p>
+
+                        <p>
+                            A single registration can be used for multiple types, as long as a compatible conversion method exists.
+                        </p>
+                        <!-- ###TEMPLATE_COMMAND_DESCRIPTION_END### -->
+                    </div>
+
+                    <!-- ###SUBTEMPLATE_COMMAND_OPTIONS_BEGIN### -->
+                    <span class="headline">Options:</span>
+                    <table class="command-options">
+                        <tbody>
+                        <!-- ###SUBTEMPLATE_COMMAND_OPTIONS_ITEM_BEGIN### -->
+                        <tr>
+                            <th>
+                                <code><!--
+                                --><span class="command-option-name"><!--
+                                    --><!-- ###TEMPLATE_COMMAND_OPTION_NAME_BEGIN### -->echo<!-- ###TEMPLATE_COMMAND_OPTION_NAME_END### --><!--
+                                --></span><!--
+                                -->=<!--
+                                --><span class="command-option-variable"><!--
+                                    --><!-- ###TEMPLATE_COMMAND_OPTION_VARIABLE_BEGIN### -->X<!-- ###TEMPLATE_COMMAND_OPTION_VARIABLE_END### --><!--
+                                --></span><!--
+                            --></code>
+                            </th>
+                            <td>
+                                <!-- ###TEMPLATE_COMMAND_OPTION_DESCRIPTION_BEGIN### -->
+                                <p>controls if and whose values should be forwarded to the channel when set</p>
+                                <!-- ###SUBTEMPLATE_COMMAND_SUFFIXES_BEGIN### -->
+                                <span class="headline">
+                                    Possible value suffixes:
+                                </span>
+                                <table class="command-suffixes">
+                                    <!-- ###SUBTEMPLATE_COMMAND_SUFFIXES_ITEM_BEGIN### -->
+                                    <tr>
+                                        <th>
+                                            <code><!-- ###TEMPLATE_COMMAND_SUFFIX_NAME_BEGIN### -->ms<!-- ###TEMPLATE_COMMAND_SUFFIX_NAME_END### --></code>
+                                        </th>
+                                        <td>
+                                            <!-- ###TEMPLATE_COMMAND_SUFFIX_DESCRIPTION_BEGIN### -->
+                                            <p>milliseconds</p>
+                                            <!-- ###TEMPLATE_COMMAND_SUFFIX_DESCRIPTION_END### -->
+                                        </td>
+                                    </tr>
+                                    <!-- ###SUBTEMPLATE_COMMAND_SUFFIXES_ITEM_END### -->
+                                    <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                                    <tr>
+                                        <th><code>f</code></th>
+                                        <td><p>frames</p></td>
+                                    </tr>
+                                    <!-- ###TEMPLATE_REMOVE_END### -->
+                                </table>
+                                <!-- ###SUBTEMPLATE_COMMAND_SUFFIXES_END### -->
+                                <!-- ###SUBTEMPLATE_COMMAND_CONSTANTS_BEGIN### -->
+                                <span class="headline">
+                                    Constants for
+                                    <span class="command-option-variable"><!--
+                                    --><!-- ###TEMPLATE_COMMAND_OPTION_VARIABLE_BEGIN### -->X<!-- ###TEMPLATE_COMMAND_OPTION_VARIABLE_END### --><!--
+                                    --></span>:
+                                </span>
+                                <table class="command-constants">
+                                    <!-- ###SUBTEMPLATE_COMMAND_CONSTANTS_ITEM_BEGIN### -->
+                                    <tr>
+                                        <th>
+                                            <code><!-- ###TEMPLATE_COMMAND_CONSTANT_NAME_BEGIN### -->all<!-- ###TEMPLATE_COMMAND_CONSTANT_NAME_END### --></code>
+                                        </th>
+                                        <td>
+                                            <!-- ###TEMPLATE_COMMAND_CONSTANT_DESCRIPTION_BEGIN### -->
+                                            <p>notify about all values being set, regardless of source</p>
+                                            <!-- ###TEMPLATE_COMMAND_CONSTANT_DESCRIPTION_END### -->
+                                        </td>
+                                    </tr>
+                                    <!-- ###SUBTEMPLATE_COMMAND_CONSTANTS_ITEM_END### -->
+                                    <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                                    <tr>
+                                        <th><code>other</code></th>
+                                        <td><p>notify only about values received through X-Plane or XPRC sessions other than the current one</p></td>
+                                    </tr>
+                                    <tr>
+                                        <th><code>xplane</code></th>
+                                        <td><p>notify only about values received through X-Plane (updates from XPRC are not forwarded)</p></td>
+                                    </tr>
+                                    <tr>
+                                        <th><code>none</code></th>
+                                        <td><p>disables all notifications</p></td>
+                                    </tr>
+                                    <!-- ###TEMPLATE_REMOVE_END### -->
+                                </table>
+                                <!-- ###SUBTEMPLATE_COMMAND_CONSTANTS_END### -->
+                                <!-- ###TEMPLATE_COMMAND_OPTION_DESCRIPTION_END### -->
+                            </td>
+                        </tr>
+                        <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                        <tr>
+                            <th>
+                                <code><span class="command-option-name">repeatFreq</span>=<span class="command-option-variable">X</span></code>
+                            </th>
+                            <td>
+                                <p>repeat in intervals of X</p>
+                                <span>
+                                    Suffixes for <span class="command-option-variable">X</span>:
+                                </span>
+                                <table class="command-suffixes">
+                                    <tr>
+                                        <th>
+                                            <code>ms</code>
+                                        </th>
+                                        <td>
+                                            <p>milliseconds</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><code>f</code></th>
+                                        <td><p>frames</p></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- ###TEMPLATE_REMOVE_END### -->
+                        <!-- ###SUBTEMPLATE_COMMAND_OPTIONS_ITEM_END### -->
+                        </tbody>
+                    </table>
+                    <!-- ###SUBTEMPLATE_COMMAND_OPTIONS_END### -->
+
+                    <!-- ###SUBTEMPLATE_COMMAND_PARAMETERS_BEGIN### -->
+                    <span class="headline">
+                        <!-- ###TEMPLATE_COMMAND_PARAMETERS_HEADLINE_BEGIN### -->
+                        Parameters: <span class="headline-annotation">(delimited by <code>;</code>)</span>
+                        <!-- ###TEMPLATE_COMMAND_PARAMETERS_HEADLINE_END### -->
+                    </span>
+                    <ol class="command-parameters">
+                        <!-- ###SUBTEMPLATE_COMMAND_PARAMETERS_ITEM_BEGIN### -->
+                        <li class="command-parameter">
+                            <!-- ###SUBTEMPLATE_COMMAND_PARAMETER_ANNOTATION_BEGIN### -->
+                            <div class="command-parameter-annotation">
+                                <table>
+                                    <tbody>
+                                    <!-- ###SUBTEMPLATE_COMMAND_PARAMETER_ANNOTATION_ITEM_BEGIN### -->
+                                    <tr>
+                                        <th>
+                                            <!-- ###TEMPLATE_COMMAND_PARAMETER_ANNOTATION_ITEM_LABEL_BEGIN### -->
+                                            Multiplicity:
+                                            <!-- ###TEMPLATE_COMMAND_PARAMETER_ANNOTATION_ITEM_LABEL_END### -->
+                                        </th>
+                                        <td>
+                                            <!-- ###TEMPLATE_COMMAND_PARAMETER_ANNOTATION_ITEM_VALUE_BEGIN### -->
+                                            at least once
+                                            <!-- ###TEMPLATE_COMMAND_PARAMETER_ANNOTATION_ITEM_VALUE_END### -->
+                                        </td>
+                                    </tr>
+                                    <!-- ###SUBTEMPLATE_COMMAND_PARAMETER_ANNOTATION_ITEM_END### -->
+                                    <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                                    <tr>
+                                        <th>Condition:</th>
+                                        <td>only if we feel like it</td>
+                                    </tr>
+                                    <!-- ###TEMPLATE_REMOVE_END### -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- ###SUBTEMPLATE_COMMAND_PARAMETER_ANNOTATION_END### -->
+                            <!-- ###TEMPLATE_COMMAND_PARAMETER_BEGIN### -->
+                            <p>
+                                value type
+                            </p>
+                            <!-- ###TEMPLATE_COMMAND_PARAMETER_END### -->
+                            <!-- ###SUBTEMPLATE_COMMAND_SUBPARAMETERS_BEGIN### -->
+                            <ol>
+                                <!-- ###TEMPLATE_COMMAND_SUBPARAMETER_ITEMS_BEGIN### -->
+                                <li class="command-parameter">
+                                    <p>this is a sub-parameter, reusing same template as for main level</p>
+                                </li>
+                                <!-- ###TEMPLATE_COMMAND_SUBPARAMETER_ITEMS_END### -->
+                            </ol>
+                            <!-- ###SUBTEMPLATE_COMMAND_SUBPARAMETERS_END### -->
+                        </li>
+                        <!-- ###SUBTEMPLATE_COMMAND_PARAMETERS_ITEM_END### -->
+                        <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                        <li class="command-parameter">
+                            <p>
+                                name of the requested dataref
+                            </p>
+                        </li>
+                        <li class="command-parameter">
+                            <div class="command-parameter-annotation">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>Multiplicity:</th>
+                                        <td>optional</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Condition:</th>
+                                        <td>optionally, if array or blob and I'm writing even more here to check how it would look like if we wrap</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>
+                                <code>[i]</code> to set only values from index <code>i</code> (<code>i=0</code> is the first element; default=<code>0</code>)
+                            </p>
+                            <p>
+                                This is a second paragraph.
+                            </p>
+                            <ul>
+                                <li>and some bullet point (not a sub-parameter!)</li>
+                            </ul>
+                        </li>
+                        <li class="command-parameter">
+                            any number of times (incl. omission), delimited by <code>:</code>
+                            <ol>
+                                <li class="command-parameter">
+                                    <div class="command-parameter-annotation">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <th>Condition:</th>
+                                                <td>only on Wednesday</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p>
+                                        Some weird parameter.
+                                    </p>
+                                </li>
+                                <li class="command-parameter">
+                                    <div class="command-parameter-annotation">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <th>Condition:</th>
+                                                <td>if it's sunny outside</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p>
+                                        This is even weirder, what's this command about?!
+                                    </p>
+                                </li>
+                                <li class="command-parameter">
+                                    at least once, delimited by <code>|</code>
+                                    <ol>
+                                        <li class="command-parameter">
+                                            <p>first param</p>
+                                        </li>
+                                        <li class="command-parameter">
+                                            <p>second one</p>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <!-- ###TEMPLATE_REMOVE_END### -->
+                    </ol>
+                    <div class="clear"></div>
+                    <!-- ###SUBTEMPLATE_COMMAND_PARAMETERS_END### -->
+
+                    <!-- ###SUBTEMPLATE_COMMAND_RESPONSES_BEGIN### -->
+                    <span class="headline">Response:</span>
+                    <ol class="command-responses">
+                        <!-- ###SUBTEMPLATE_COMMAND_RESPONSES_ITEM_BEGIN### -->
+                        <li>
+                            <!-- ###TEMPLATE_COMMAND_RESPONSE_BEGIN### -->
+                            <p>
+                                status
+                            </p>
+                            <ul>
+                                <li>If dataref cannot be claimed or types are different than already claimed: <code>ERR</code></li>
+                                <li>Otherwise: <code>ACK</code></li>
+                            </ul>
+                            <!-- ###TEMPLATE_COMMAND_RESPONSE_END### -->
+                        </li>
+                        <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                        <li>
+                            <p>
+                                When the dataref value has been touched, sent according to <code>echo</code> option:
+                            </p>
+                            <ul>
+                                <li>
+                                    value(s) at referenced time
+                                    <ul>
+                                        <li>see dataref type descriptions for value encoding</li>
+                                        <li>
+                                            if the dataref has been registered for multiple types, values are separated by semicolon
+                                            <ul>
+                                                <li>
+                                                    in order specified as # in type overview (note: <strong>not</strong> matching order from command parameter)
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>
+                                Something else.
+                            </p>
+                            <div class="special-block special-block-note"><p>Just for the template. Not actually sent.</p></div>
+                        </li>
+                        <!-- ###TEMPLATE_REMOVE_END### -->
+                        <!-- ###SUBTEMPLATE_COMMAND_RESPONSES_ITEM_END### -->
+                    </ol>
+                    <!-- ###SUBTEMPLATE_COMMAND_RESPONSES_END### -->
+
+                    <!-- ###SUBTEMPLATE_COMMAND_NOTES_BEGIN### -->
+                    <span class="headline">Notes:</span>
+                    <ul class="command-notes">
+                        <!-- ###SUBTEMPLATE_COMMAND_NOTES_ITEM_BEGIN### -->
+                        <li>
+                            <!-- ###TEMPLATE_COMMAND_NOTE_BEGIN### -->
+                            <p>
+                                Nullam suscipit enim suscipit vulputate scelerisque. Fusce quis ligula at tortor eleifend scelerisque vitae nec neque. Duis eu
+                                scelerisque tellus. Curabitur purus orci, egestas at euismod vitae, vehicula mollis lorem. Curabitur quis arcu et mauris euismod
+                                aliquet. Nullam interdum quam quis odio sodales mattis.
+                            </p>
+                            <!-- ###TEMPLATE_COMMAND_NOTE_END### -->
+                        </li>
+                        <!-- ###SUBTEMPLATE_COMMAND_NOTES_ITEM_END### -->
+                        <!-- ###TEMPLATE_REMOVE_BEGIN### -->
+                        <li>
+                            <p>
+                                Pellentesque lacus lorem, euismod vitae euismod ut, eleifend id sapien. Fusce sollicitudin, turpis ac vulputate molestie, libero
+                                massa molestie libero, sed vestibulum enim massa aliquet ipsum.
+                            </p>
+                            <p>
+                                Cras non ultrices purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at consectetur lectus. Donec vel turpis
+                                et leo porta placerat. Morbi hendrerit nunc sit amet nisi pharetra luctus. Praesent hendrerit faucibus risus eu posuere. Nam
+                                egestas nulla nisi, sed venenatis elit sodales ac.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Donec mattis, neque sit amet congue malesuada, libero sapien consectetur arcu, ut porttitor leo erat a quam.
+                                Vestibulum arcu nisl, maximus in nisl ac, congue blandit ante. Phasellus congue egestas ligula quis sodales.
+                            </p>
+                            <ul>
+                                <li>pulvinar nisi eget lacus pulvinar hendrerit</li>
+                                <li>fusce sollicitudin, turpis ac vulputate molestie</li>
+                                <li>velit eget ligula placerat imperdiet</li>
+                            </ul>
+                            <p>
+                                Nullam euismod laoreet suscipit. Phasellus quam nunc, porttitor a faucibus vel, posuere in dui.
+                            </p>
+                        </li>
+                        <!-- ###TEMPLATE_REMOVE_END### -->
+                    </ul>
+                    <!-- ###SUBTEMPLATE_COMMAND_NOTES_END### -->
+
+                    <!-- ###TEMPLATE_COMMAND_EXAMPLES### -->
+                </div>
+                <!-- ###SUBTEMPLATE_COMMAND_END### -->
+
+                <!-- ###TEMPLATE_CONTENT_END### -->
+                <h2 id="embedded-licenses">HTML-Embedded Licenses</h2>
+                <p>
+                    This HTML file embeds some resources subject to the licenses listed below.
+                </p>
+                <h3>Font: Source&trade; Sans 3</h3>
+                <p>
+                    Copyright 2010-2024 Adobe (http://www.adobe.com/)<br/>
+                    SIL Open Font License, Version 1.1<br/>
+                    Source is a trademark of Adobe in the United States and/or other countries.
+                </p>
+                <div class="box default-collapsed">
+                    <div class="box-header">Full License Information</div>
+                    <div class="box-content">
+                        <!-- <editor-fold desc="license text" defaultstate="collapsed"> -->
+                        <pre class="code wrap no-alternate">
+Copyright 2010-2024 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'. All Rights Reserved. Source is a trademark of Adobe in the United States and/or other countries.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+
+This license is copied below, and is also available with a FAQ at: http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+                        <!-- </editor-fold> -->
+                    </div>
+                </div>
+                <h3>Font: Inter</h3>
+                <p>
+                    Copyright (c) 2016 The Inter Project Authors (<a href="https://github.com/rsms/inter"
+                                                                     target="_blank">https://github.com/rsms/inter</a>)<br/>
+                    SIL Open Font License, Version 1.1
+                </p>
+                <div class="box default-collapsed">
+                    <div class="box-header">Full License Information</div>
+                    <div class="box-content">
+                        <!-- <editor-fold desc="license text" defaultstate="collapsed"> -->
+                        <pre class="code wrap no-alternate">
+Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION AND CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+    </pre>
+                        <!-- </editor-fold> -->
+                    </div>
+                </div>
+                <h3>Font: JetBrains Mono</h3>
+                <p>
+                    Copyright 2020 The JetBrains Mono Project Authors (<a href="https://github.com/JetBrains/JetBrainsMono"
+                                                                          target="_blank">https://github.com/JetBrains/JetBrainsMono</a>)<br/>
+                    SIL Open Font License, Version 1.1
+                </p>
+                <div class="box default-collapsed">
+                    <div class="box-header">Full License Information</div>
+                    <div class="box-content">
+                        <!-- <editor-fold desc="license text" defaultstate="collapsed"> -->
+                        <pre class="code wrap no-alternate">
+Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+    </pre>
+                        <!-- </editor-fold> -->
+                    </div>
+                </div>
+
+                <p class="document-info">
+                    <!-- ###TEMPLATE_DOCUMENT_INFO_BEGIN### -->
+                    Build time: 6 Mar 2026 12:34:56 UTC<br/>
+                    Source time: 6 Mar 2026 11:10:20 UTC<br/>
+                    Source revision: <code>main</code> / <code>12345678901234567890123456789012</code>
+                    <!-- ###TEMPLATE_DOCUMENT_INFO_END### -->
+                    <br/>
+                    Official repository: <a href="https://codeberg.org/dneuge/xprc-protocol" target="_blank">https://codeberg.org/dneuge/xprc-protocol</a>
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

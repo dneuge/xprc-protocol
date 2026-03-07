@@ -1,3 +1,10 @@
 .idea
 
+target/
+tools/htmldocs/template/*.css
+tools/htmldocs/template/*.map
+
+.venv
+
 *.nocommit
+*.nocommit.*
