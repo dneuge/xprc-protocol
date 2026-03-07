@@ -902,5 +902,17 @@ main ul.conversation {
     h2 {
         break-before: page;
     }
+
+    .box.box-collapsed {
+        /* all collaped boxes must be expanded for their contents to be printable */
+
+        > .box-header::before {
+            display: none;
+        }
+
+        > .box-content {
+            display: block;
+        }
+    }
 }
 
