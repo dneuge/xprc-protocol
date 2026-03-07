@@ -23,8 +23,6 @@
         </chapter>
         <markdown file="extending-protocol.md" />
         <markdown file="special-considerations.md" />
-        <chapter title="Appendix">
-            <markdown file="../LICENSE.md" />
-        </chapter>
+        <markdown file="../LICENSE.md" />
     </parts>
 </document>
