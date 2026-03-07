@@ -35,7 +35,64 @@ Documentation source code is mostly kept inside the [`src`](src) directory. The 
 - [commands](src/commands) are described in XML (according to the [command schema](src/command.xsd)) to ensure uniform templating, text blocks generally use Markdown formatting
 - other sections are written in Markdown (`.md`) format
 
-Tooling will be provided shortly to compile HTML and possibly PDF (via LaTeX) files from those sources.
+### Documentation format
+
+Markdown files and command sections support the following special formats:
+
+#### Highlight boxes
+
+Particularly important information can be highlighted using the same extension used by e.g. [GitHub](https://github.com/orgs/community/discussions/16925) and [Gitlab](https://docs.gitlab.com/user/markdown/#alerts):
+
+```markdown
+> [!warning]
+> Take extra care about whatever was written surrounding this box.
+```
+
+The HTML template currently supports the following tags, listed in ascending order of severity:
+
+1. `note` to point out generally important information
+2. `warning` for indicating something that might lead to issues if not taken care of (e.g. unintended results)
+3. `caution` to warn about something that could have severe consequences if not followed (e.g. general protocol incompatibility)
+
+#### Conversation transcripts
+
+In addition to XML command descriptions, transcripts describing client/server communication can also be provided from
+Markdown files by following a specific table layout:
+
+* header columns must read `Sender` and `Content`
+* sender column
+  * must indicate `Client` or `Server` for data sent by either actor
+  * must be blank for full-line remarks or "later"/"time passes" markers
+* content column
+  * must start with inline code for data sent by `Client`/`Server`
+  * must indicate remarks emphasized in parentheses `*(like this)*`
+  * remarks may stand alone (full-line) or follow client/server content
+  * three dots (`...`) can be used for "later"/"time passes"
+
+```markdown
+| Sender  | Content                                            |
+|---------|----------------------------------------------------|
+| Client  | `ABCD XTST whatever`                               |
+| Server  | `+ACK ABCD 2837` *(remark referring to this line)* |
+|         | ...                                                |
+|         | *(full-line remark)*                               |
+```
+
+## Compiling the documentation locally
+
+This repository includes custom tooling and templates to compile an HTML-based documentation, located in
+[`tools/htmldocs/`](tools/htmldocs).
+
+Compilation requires a Linux-compatible environment with Bash, [Less](https://lesscss.org) (command `lessc`) and a recent
+version of Python.
+
+Instead of invoking the compiler directly and taking care of dependencies, you may want to invoke
+[`do_all.sh`](do_all.sh) which [validates](validate.sh) and [builds](build.sh) the documentation to your local `target`
+directory (created parallel to `src`).
+
+> [!warning]
+> The `target` directory will be deleted, in part or as a whole, at the start of a build and is excluded from version
+> control.
 
 ## History
 
