@@ -26,6 +26,19 @@ The protocol is not in a stable state yet. Please refer to the [issues list](htt
 - some essential commands are still under review (`SRLC` and `SRFS`)
 - some essential command options are under review and may still be reworked or removed
 
+## Documentation for in-development versions
+
+When new versions are officially released/tagged with an actual version number, compiled documentation will be attached
+to the release on official repository locations.
+
+Copies of those, including preliminary in-development snapshots, are also available from the `compiled` branch of this
+repository. That branch should not be synced with as it gets reset by CI jobs on every update. The documentation
+cannot be rendered directly, so you need to download the desired files and open them locally.
+
+Downloads of the complete branch are also available as ZIP archives from either
+[Codeberg](https://codeberg.org/dneuge/xprc-protocol/archive/compiled.zip)
+or [GitHub](https://github.com/dneuge/xprc-protocol/archive/refs/heads/compiled.zip).
+
 ## Contributing (e.g. requesting features)
 
 Please refer to the dedicated [contribution guidelines](CONTRIBUTING.md).
