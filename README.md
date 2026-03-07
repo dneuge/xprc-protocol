@@ -83,8 +83,9 @@ Markdown files by following a specific table layout:
 This repository includes custom tooling and templates to compile an HTML-based documentation, located in
 [`tools/htmldocs/`](tools/htmldocs).
 
-Compilation requires a Linux-compatible environment with Bash, [Less](https://lesscss.org) (command `lessc`) and a recent
-version of Python.
+Compilation/validation requires a Linux-compatible environment with Bash, `xmllint` (provided as part of
+[libxml2](https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home), packaged in `libxml2-utils` on Ubuntu),
+[Less](https://lesscss.org) (command `lessc`) and a recent version of [Python](https://www.python.org).
 
 Instead of invoking the compiler directly and taking care of dependencies, you may want to invoke
 [`do_all.sh`](do_all.sh) which [validates](validate.sh) and [builds](build.sh) the documentation to your local `target`
