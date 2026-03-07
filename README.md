@@ -61,7 +61,7 @@ All original resources and tooling of this project are provided under [MIT or MI
 declared otherwise (e.g. by source code comments). Please see the [full license file](LICENSE.md) for details, including
 an explanation of how it applies to implementations.
 
-The HTML template and generated documentation in HTML format contain fonts which are also
+The HTML template and compiled documentation in HTML format contain fonts which are also
 [included in this repository](tools/htmldocs/template/fonts) as unpacked original copies.
 Please refer to each directory's `_source.txt` file and each font's website/repository for
 detailed information:
