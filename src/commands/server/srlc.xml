@@ -38,7 +38,7 @@
               * `/` if unavailable (cannot be enabled)
               * omitted if always enabled (cannot be disabled)
            2. feature flag name
-              * one or more basic alpha-numeric characters incl. `-`, case sensitive (regular expression: `[a-zA-Z0-9\-]+`)
+              * one or more basic alpha-numeric characters incl. `-` (but not leading), case sensitive (regular expression: `[a-zA-Z0-9][a-zA-Z0-9\-]*`)
               * `x-` should be used as a prefix to server-specific flags
     </description>
     <responses>

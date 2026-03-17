@@ -8,6 +8,8 @@ Revisions to the protocol are handled in three ways:
 * command versions are incremented in case of incompatible changes
 * command features not requiring a full command revision can be discovered and possibly activated/deactivated using feature flags
 
+In addition to actual protocol versioning, feature flags can also be used to indicate general server-side feature availability, such as optional features (not supported by all servers) or features depending on certain X-Plane/SDK versions (such as `unspecific` flag on `DRLS`).
+
 Feature flags and command versions are explained in command specifications, if available.
 
 Clients/applications are recommended to discover command versions and feature flags through `SRLC` upon connecting to the server. `SRFS` may then be used to switch command versions or enable/disable individual feature flags, if supported by the server.
@@ -15,6 +17,8 @@ Clients/applications are recommended to discover command versions and feature fl
 Servers are not required to support multiple versions (neither base protocol nor commands) or reconfiguration through feature flags. `SRFS` requests need to result in error (`ERR`) indications and `SRLC` should indicate feature flags as unmodifiable in that case.
 
 Version and feature flag selections must be kept local to the session requesting those changes; other sessions must remain unaffected. Clients need to reestablish the desired configuration when reconnecting.
+
+Feature flag names are case-sensitive and consist of one or more basic alpha-numeric characters incl. `-`. However, names must not start with `-` to avoid collision with feature state syntax (see prefixes used by `SRLC` and `SRFS` commands, regular expression for feature flag names: `[a-zA-Z0-9][a-zA-Z0-9\-]*`).
 
 ### Recommended Flow for Session Initiation
 
