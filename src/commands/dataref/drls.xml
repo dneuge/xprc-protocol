@@ -6,6 +6,9 @@
     <description>
         Lists information about available datarefs. The command allows retrieval of information about specific datarefs as well as listing all datarefs known to X-Plane (unspecific). Unspecific retrieval depends on X-Plane 12.04 APIs or workarounds in case of previous versions. If unspecific retrieval is requested but not supported, servers should reply with an error status.
     </description>
+    <features>
+        <flag name="unspecific">supports listing all datarefs known to X-Plane</flag>
+    </features>
     <options>
         <option name="rwCheck" default="simulator">
             <description>
