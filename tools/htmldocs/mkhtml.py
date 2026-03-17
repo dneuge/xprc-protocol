@@ -969,6 +969,25 @@ class Command(DocumentElement):
 
         self.description = get_inner_content(root_elem.getElementsByTagName('description')[0])
 
+        self.features : dict[str, str] = {}
+        features_group_elems = root_elem.getElementsByTagName('features')
+        if len(features_group_elems) > 1:
+            raise ValueError('Only a single "features" block is expected per command.')
+        elif len(features_group_elems) == 1:
+            for flag_elem in features_group_elems[0].getElementsByTagName('flag'):
+                name = flag_elem.getAttribute('name').strip()
+                if name == '':
+                    raise ValueError('feature flag name is missing/blank')
+
+                description = unindent(get_inner_xml(flag_elem))
+                if description.strip() == '':
+                    raise ValueError('feature flag description is missing/blank')
+
+                if name in self.features:
+                    raise ValueError(f'multiple definitions for feature flag "{name}" ')
+
+                self.features[name] = description
+
         self.options : list[CommandOption] = []
         options_group_elems = root_elem.getElementsByTagName('options')
         if len(options_group_elems) > 1:
@@ -1195,6 +1214,18 @@ class CommandRenderer:
 
         out = replace_template_markers(out, 'COMMAND_DESCRIPTION', render_markdown(command.description))
 
+        if len(command.features) > 0:
+            features_items_html = ''
+            for flag_name, flag_description in sorted(command.features.items()):
+                features_item_html = self.templates['FEATURES_ITEM']
+                features_item_html = replace_template_markers(features_item_html, 'COMMAND_FEATURE_NAME', flag_name)
+                features_item_html = replace_template_markers(features_item_html, 'COMMAND_FEATURE_DESCRIPTION', render_markdown(flag_description))
+
+                features_items_html += features_item_html
+
+            features_html = replace_template_markers(self.templates['FEATURES'], 'COMMAND_FEATURES_ITEM', features_items_html)
+            out = replace_template_markers(out, 'COMMAND_FEATURES', features_html)
+
         if len(command.options) > 0:
             options_items_html = ''
             for option in command.options:
@@ -1294,6 +1325,9 @@ class CommandRenderer:
         _extract('CONSTANTS_ITEM', 'CONSTANTS')
         _extract('SUFFIXES', insert_marker=False)
         _extract('SUFFIXES_ITEM', 'SUFFIXES')
+
+        _extract('FEATURES')
+        _extract('FEATURES_ITEM', 'FEATURES')
 
         _extract('OPTIONS')
         _extract('OPTIONS_ITEM', 'OPTIONS')

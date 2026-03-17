@@ -26,6 +26,13 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="features" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="flag" type="FeatureFlag" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="options" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
@@ -71,6 +78,14 @@
         <xs:sequence>
             <xs:element name="m" type="xs:string" minOccurs="4" maxOccurs="4" />
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FeatureFlag">
+        <xs:simpleContent>
+            <xs:extension base="Markdown">
+                <xs:attribute name="name" type="xs:string" />
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 
     <xs:complexType name="Option">
