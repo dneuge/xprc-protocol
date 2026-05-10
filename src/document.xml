@@ -3,7 +3,7 @@
           xsi:noNamespaceSchemaLocation="document.xsd">
     <parts>
         <markdown file="intro.md" />
-        <markdown file="passwords.md" />
+        <markdown file="settings.md" />
         <markdown file="text-mode.md" />
         <markdown file="handshake.md" />
         <markdown file="basic-syntax.md" />
