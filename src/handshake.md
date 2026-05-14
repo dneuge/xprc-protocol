@@ -14,9 +14,11 @@ Servers may delay further communication (incl. closing the connection) for a ran
 The server will then either, in case of
 - failed authentication: close the connection without further response
 - unsupported protocol revision: indicate the highest supported protocol revision, followed by `;ERR:` and a descriptive message intended to be shown to users (not machine-readable)
-- success: confirm the protocol revision active on this session followed by `;OK;` and an ISO 8601 timestamp of session start
+- success: confirm the protocol revision active on this session followed by `;OK;` and an ISO 8601 timestamp of session start (see details below)
 
-The server system timestamp provided during a successful handshake should be referenced to the client's local clock and stored if necessary, as it is used for time reference in later communication. Full date and time will be provided but the exact format may vary (e.g. with or without milliseconds, `Z` or `+00:00` for UTC, possibly indicating a different time offset like `+01:00`). Neither server nor client clocks are required to be synchronized, so time reference may drift during longer sessions.
+The server system timestamp provided during a successful handshake should be stored by clients and may be advisable to be referenced to the client's local clock at time of reception, as later communication uses only relative timestamps.
+
+The ISO 8601 timestamp must feature full date and time, including the time zone offset in *plus/minus hours:minutes* format (e.g. `+05:30`) or, alternatively (in addition to `+00:00`), `Z` for UTC. This protocol requires neither server nor client clocks to be synchronized, so clock drifts on remote connections may be noticeable over longer sessions. Precision for sub-second parts can be arbitrary and may be shortened to tens or hundreds of a second. Missing decimal places should be assumed as zero when higher precision is available on client side (0.4 seconds = 0.400 seconds = 400 milliseconds). While higher precision (such as micro or even nanoseconds) may be indicated, sub-millisecond precision is unnecessary due to network delays and relative timestamps allowing only millisecond precision anyway.
 
 The version number used during handshake only indicates the basic protocol revision. Available commands, their protocol revisions and feature subsets can be queried after login; see the section on Feature Versioning.
 
