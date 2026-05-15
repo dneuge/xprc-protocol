@@ -6,7 +6,7 @@
     <description>
         Queries basic information about the XPRC server.
 
-        The server will send key/value pairs. Keys must be unique per query, order does not matter.
+        The server will send key/value pairs. Keys must be unique per query, order does not matter. Keys are case-sensitive.
 
         While some information is mandatory to be provided by servers, clients should not expect them to always be
         present as additional keys may only be added in future protocol revisions and thus may be missing from older
@@ -32,7 +32,7 @@
             status, always `ACK`
         </response>
         <response>
-            Multiple messages, each holding a key/value pair as described above. Keys are separated by colon `:` from values.
+            Multiple messages, each holding a single key/value pair as described above. The first colon `:` delimits key and value. Any later colons belong to the value which is terminated by the end of message. Keys must have at least one character but values may be empty (still requiring the key delimiter).
         </response>
     </responses>
     <examples>
