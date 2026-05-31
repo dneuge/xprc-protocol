@@ -11,9 +11,16 @@
         Servers may not allow any changes to be made. The command should still be implemented as a placeholder always
         indicating an error (`ERR`) status in that case.
 
-        Servers should never punish clients for errors caused by legit `SRFS` requests.
+        Changing versions may reset feature flags to the command version's default. If version and feature changes are
+        requested in the same command, servers should first (preliminarily) change command version to update features
+        before applying any requested changes to them
 
-        Changing versions may reset feature flags to the command version's default.
+        If mandatory feature flag changes are being requested, any unsupported/failed change should fail the whole
+        command without further side-effects, neither version nor feature selection must be (partially) changed in
+        that case. Clients are recommended to request conditional feature changes to ease implementation unless
+        exact feature selection is essential for client operations.
+
+        Servers should never punish clients for errors caused by legit `SRFS` requests.
 
         Clients are recommended to check `SRLC` before using this command and verify actual features by requesting
         `SRLC` again after all `SRFS` requests have been completed.
@@ -29,8 +36,10 @@
                 change of flag, consisting of: (concatenated without space)
 
                 1. requested state of feature flag:
-                   * `+` to enable the feature flag
-                   * `-` to disable the feature flag
+                   * `+` to enable the feature flag (mandatory - will fail command if not possible)
+                   * `-` to disable the feature flag (mandatory - will fail command if not possible)
+                   * `*` to conditionally request a feature flag to be enabled, if possible (optional - actual result must be checked via `SRLC`)
+                   * `/` to conditionally request a feature flag to be disabled, if possible (optional - actual result must be checked via `SRLC`)
                 2. name of feature flag to change
             </parameter>
         </subparameters>
