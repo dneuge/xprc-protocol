@@ -24,16 +24,19 @@ Feature flag names are case-sensitive and consist of one or more basic alpha-num
 
 To ensure command and feature availability/compatibility, clients/applications are recommended to perform the following actions immediately upon session initiation:
 
-1. query `SRID` to detect server implementation (`id` and `version`)
+1. issue `SRFS` to attempt selecting the expected version for the `SRFS` command
+2. issue `SRFS` to attempt selecting the expected versions for `SRID` and `SRLC` commands
+3. query `SRLC` to detect command availability incl. versions and feature flags
+    * if unsupported versions of `SRLC`, `SRID` or `SRFS` are indicated try downgrading affected commands via `SRFS` and retry, if the client supports more versions than already requested in steps 1 and 2
+4. query `SRID` to detect server implementation (`id` and `version`)
    * needed to interpret any experimental commands or experimental feature flags, if relevant
-2. query `SRLC` to detect command availability incl. versions and feature flags
-   * if an unsupported version of `SRLC` is indicated try downgrading the command via `SRFS` and retry
-     * defensively written clients may want to disconnect if `SRLC` command version is different because responses may be misinterpreted,and commands cannot be verified, `SRFS` command would need to be issued "blindly"
-3. for commands using different versions than supported by the client:
-   * if higher than supported, try downgrading commands to a version supported by the client via `SRFS`
-   * if lower than supported or command cannot be switched to a compatible version: block the command on client side, log/issue a warning to application/user if actually used
-4. if any commands were reconfigured in the previous step: query `SRLC` again to verify changes and check available feature flags
-5. request changes to command feature flags if necessary using `SRFS`
-6. if any commands were reconfigured in the previous step: verify via `SRLC` again
+5. configure versions and features of all other commands as required; recommended:
+   * if command version is higher than supported, try downgrading commands to a version supported by the client via `SRFS`
+   * if command version is lower than supported or the command cannot be switched to a compatible version: block the command on client side, log/issue a warning to application/user if actually used
+   * use conditional feature flag selection unless strictly required
+   * configure all commands in parallel to minimize delays
+6. query `SRLC` again to verify changes and check available feature flags
+
+It is recommended to cache last retrieved `SRLC` and `SRID` results for fast evaluation. If conditional feature selection is insufficient, it may be necessary to select command versions, followed by an extra `SRLC` update, before feature selection.
 
 Applications/users may find it helpful to be able to check availability/support of actually used commands ahead of time. Incompatible commands/features which are not used by the application are unlikely to hold any relevance but failing commands only as they are attempted to be used may be inconvenient for end-users.
