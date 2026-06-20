@@ -8,8 +8,8 @@ This project contains the protocol specification to be implemented by servers an
 
 Official repositories are hosted on [Codeberg](https://codeberg.org/dneuge/xprc-protocol) and [GitHub](https://github.com/dneuge/xprc-protocol).
 Both locations are kept in sync and can be used to submit pull requests but issues are only tracked on
-[Codeberg](https://codeberg.org/dneuge/xprc-protocol/issues) to gather them in a single place. Please note that
-this project has a strict "no AI" policy [affecting all contributions](CONTRIBUTING.md) incl. issue reports.
+[Codeberg](https://codeberg.org/dneuge/xprc-protocol/issues) to gather them in a single place. Please note that [all contributions](CONTRIBUTING.md) incl.
+issue reports are subject to a restrictive [AI Usage Policy](AI_USAGE_POLICY.md).
 
 Related projects:
 
@@ -153,15 +153,14 @@ Unless you can comply with the licenses of this project you obviously are not pe
 set. Although it may not be required by those licenses, you are additionally asked to make your AI model publicly
 available under an open license and for free, to play fair and contribute back to the open community you take from.
 
-AI tools are not permitted to be used for contributions to this project. The main reason is that, as of time of writing,
-no tool/model offers traceability nor can today's AI models understand and reason about what they are actually doing.
-Apart from potential copyright/license violations the quality of AI output is doubtful and generally requires more
-effort to be reviewed and cleaned/fixed than actually contributing original work. Contributors will be asked to confirm
-and permanently record compliance with these guidelines.
+For contributions to this project, **AI tools and services may only be used as detailed in the
+[Contribution Guidelines](CONTRIBUTING.md) and separate [AI Usage Policy](AI_USAGE_POLICY.md)**. Contributors will be
+asked to confirm and permanently record compliance with that policy. Violations may lead to immediate and permanent
+removal from this project, depending on severity.
 
 **Note that providing this project as input to an LLM creates derivatives of this project or at least counts as a
 software dependency, requiring you to comply with full license terms (exemptions are not applicable).** See the
-[license file](LICENSE.md) for details. Avoid AI to avoid legal issues, it's not worth it.
+[license file](LICENSE.md) for details.
 
 ## Acknowledgements
 

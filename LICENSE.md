@@ -54,9 +54,10 @@ Examples:
 - *automatically* generating/deriving software or other resources based on this repository: such generation will create
   an actual derivative product, requiring you to follow all license terms (exemptions do not apply)
   > [!warning]
-  > Using "Artificial Intelligence" for code generation is a prime example for this case. It is generally
-  > recommended to not use this project together with "AI" (see also the clarification on AI usage in the
-  > [readme](README.md) file). AI users are recommended to seek international legal advice to avoid license violations.
+  > This applies to AI, in particular. While it would be possible to automatically generate clients from this
+  > specification, that creates a direct derivative work and thus is subject to the exact same license conditions as
+  > the original project. You are recommended to seek international legal advice to avoid license violations before
+  > publishing such derivative work.
 - forking this project or creating new revisions of the specification is fully subject to all licenses (exemptions do
   not apply)
 
